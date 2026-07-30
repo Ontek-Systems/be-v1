@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-navy: #274957;
+  --color-primary-sky: #70a7bf;
+  --color-primary-gold: #e6be48;
+  --color-primary-cream: #effcff;
+
+  --breakpoint-xs: 22.5rem;
+
+  /* Inter is the text face, Woodland the display face. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-woodland), var(--font-inter), sans-serif;
+}
+
+body {
+  @apply bg-white text-primary-navy font-sans;
+  font-optical-sizing: auto;
+}
+
+img {
+  filter: saturate(1.1);
+}
+
+/* ---------------------------------------------------------------
+   Vertical rhythm.
+
+   Three section sizes, and only three. Never hand-roll `py-*` on a
+   <section> — use one of these so every band on the site lines up.
+
+     section-y-sm  compact bands (logo strips, page heroes)
+     section-y     the default for every content section
+     section-y-lg  feature moments that need extra room
+   --------------------------------------------------------------- */
+
+@utility section-y-sm {
+  padding-block: 3rem;
+  @media (width >= 40rem) {
+    padding-block: 3.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-block: 4rem;
+  }
+}
+
+@utility section-y {
+  padding-block: 4rem;
+  @media (width >= 40rem) {
+    padding-block: 5rem;
+  }
+  @media (width >= 64rem) {
+    padding-block: 7rem;
+  }
+}
+
+@utility section-y-lg {
+  padding-block: 5rem;
+  @media (width >= 40rem) {
+    padding-block: 7rem;
+  }
+  @media (width >= 64rem) {
+    padding-block: 9rem;
+  }
+}
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
