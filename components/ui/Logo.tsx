@@ -11,7 +11,7 @@ export function Logo({ tone = "brown", className = "" }: Readonly<LogoProps>) {
     return (
       <Link href="/" className={`group inline-block ${className}`}>
         <Image
-          src="/assets/images/logo.png"
+          src="/be-v1/assets/images/logo.png"
           alt="Blissful Escapes, Personally Planned Travel"
           width={500}
           height={150}

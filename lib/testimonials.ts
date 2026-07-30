@@ -31,11 +31,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Emma helped us pick out the perfect itinerary which suited our budget, leading to a seamless travelling experience and unforgettable memories! Emma remained on hand throughout the trip to assist with any questions we had, and her bespoke service and travel agent experience really did prove useful. 10/10, would highly recommend!",
     highlights: ["2-Day Serengeti Safari", "4 Hotel Stays", "5 Seamless Flights"],
-    imageSrc: "/assets/images/testimonials/matt-carrigan-lions-safari.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/matt-carrigan-lions-safari.webp",
     imageAlt: "Wild lions on game drive in Tanzania",
-    heroImage: "/assets/images/testimonials/matt-carrigan-lions-safari.webp",
+    heroImage: "/be-v1/assets/images/testimonials/matt-carrigan-lions-safari.webp",
     heroImageAlt: "Wild lions on game drive in Tanzania",
-    secondaryImage: "/assets/images/testimonials/matt-carrigan-zanzibar-beach.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/matt-carrigan-zanzibar-beach.webp",
     secondaryImageAlt: "Zanzibar palm beach resort",
   },
   {
@@ -51,11 +51,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Emma kept in touch throughout the booking process and confirmed our itinerary. Transfer from the airport to the hotel was exactly where it was supposed to be (they even waited around after an hour delay). As it was a special birthday for my husband, Emma arranged an amazing 2-bedroom suite at Amari Phuket which was beyond any form of luxury we have ever experienced! Loved this experience 🥰",
     highlights: ["Amari Phuket Luxury Suite", "Elephant Hills Sanctuary", "Krabi Private Villa"],
-    imageSrc: "/assets/images/testimonials/donna-brown-elephant-hills-thailand.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/donna-brown-elephant-hills-thailand.webp",
     imageAlt: "Feeding elephants at Elephant Hills sanctuary in Thailand",
-    heroImage: "/assets/images/testimonials/donna-brown-elephant-hills-thailand.webp",
+    heroImage: "/be-v1/assets/images/testimonials/donna-brown-elephant-hills-thailand.webp",
     heroImageAlt: "Feeding elephants at Elephant Hills sanctuary in Thailand",
-    secondaryImage: "/assets/images/testimonials/donna-brown-phuket-amari-beach.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/donna-brown-phuket-amari-beach.webp",
     secondaryImageAlt: "Amari Phuket beach front resort",
   },
   {
@@ -71,11 +71,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Booking the best excursions, transport and a beautiful hotel. Emma made the whole trip person centred to us. From snowmobiling across glaciers to watching the green aurora borealis, it was absolutely amazing. We can't thank you enough.",
     highlights: ["Gullfoss Waterfall Tour", "Glacier Snowmobiling", "Northern Lights & Blue Lagoon"],
-    imageSrc: "/assets/images/testimonials/clair-blackhurst-gullfoss-waterfall-iceland.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/clair-blackhurst-gullfoss-waterfall-iceland.webp",
     imageAlt: "Gullfoss waterfall surrounded by snow in Iceland",
-    heroImage: "/assets/images/testimonials/clair-blackhurst-gullfoss-waterfall-iceland.webp",
+    heroImage: "/be-v1/assets/images/testimonials/clair-blackhurst-gullfoss-waterfall-iceland.webp",
     heroImageAlt: "Gullfoss waterfall surrounded by snow in Iceland",
-    secondaryImage: "/assets/images/testimonials/clair-blackhurst-northern-lights-iceland.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/clair-blackhurst-northern-lights-iceland.webp",
     secondaryImageAlt: "Aurora Borealis Northern Lights in Iceland night sky",
   },
   {
@@ -91,11 +91,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Amazing services & Emma the owner goes above and beyond. We will now be using Emma all the time, Blissful Escapes is the new future 💕",
     highlights: ["Cefalù Cathedral Square", "Taormina Balcony Sea View", "24/7 Crisis Support"],
-    imageSrc: "/assets/images/testimonials/helen-flynn-cefalu-cathedral-square.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/helen-flynn-cefalu-cathedral-square.webp",
     imageAlt: "Cefalu Cathedral square at golden hour in Sicily",
-    heroImage: "/assets/images/testimonials/helen-flynn-cefalu-cathedral-square.webp",
+    heroImage: "/be-v1/assets/images/testimonials/helen-flynn-cefalu-cathedral-square.webp",
     heroImageAlt: "Cefalu Cathedral square at golden hour in Sicily",
-    secondaryImage: "/assets/images/testimonials/helen-flynn-sicily-balcony-view.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/helen-flynn-sicily-balcony-view.webp",
     secondaryImageAlt: "Sicily seaside resort terrace view",
   },
   {
@@ -111,11 +111,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Her genuine help which went above and beyond was so needed. Thanks Emma and here's to you booking our next trip to the Christmas markets! 👍😍 xx",
     highlights: ["Alpine Cable Car", "Chalet Stream Village", "Panoramic Mountain Terrace"],
-    imageSrc: "/assets/images/testimonials/claire-torr-switzerland-alpine-terrace.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/claire-torr-switzerland-alpine-terrace.webp",
     imageAlt: "Swiss Alpine mountain terrace lounge with scenic views",
-    heroImage: "/assets/images/testimonials/claire-torr-switzerland-alpine-terrace.webp",
+    heroImage: "/be-v1/assets/images/testimonials/claire-torr-switzerland-alpine-terrace.webp",
     heroImageAlt: "Swiss Alpine mountain terrace lounge with scenic views",
-    secondaryImage: "/assets/images/testimonials/claire-torr-switzerland-chalet-river.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/claire-torr-switzerland-chalet-river.webp",
     secondaryImageAlt: "Swiss chalet village alongside mountain stream",
   },
   {
@@ -131,11 +131,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "All accommodation booked in Coogee (Sydney), Melbourne, Jervis Bay and rounded off in Dubai was excellent. Emma booked my flights with Emirates from Manchester and scheduled my layover in Dubai perfectly to minimise jet lag. My trip back was rounded off with a business class upgrade which Emma secured at a price I could not refuse! A welcoming bottle of wine in Coogee after a 15hr flight was a great touch.",
     highlights: ["Emirates Business Class Upgrade", "Coogee Beachfront Stay", "Dubai Private Boat Charter"],
-    imageSrc: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
+    imageSrc: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
     imageAlt: "Aerial view of Palm Jumeirah in Dubai",
-    heroImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
+    heroImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
     heroImageAlt: "Aerial view of Palm Jumeirah in Dubai",
-    secondaryImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
+    secondaryImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-26.webp",
     secondaryImageAlt: "Dubai skyline at sunset",
   },
   {
@@ -151,11 +151,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Yours and the teams you work with expertise and knowledge have been second to none and extremely reassuring when we are planning our trip of a lifetime and spending the budget to go with it! We cannot wait to plan where to next...",
     highlights: ["Inca Trail Trek", "Galápagos Cruise", "Costa Rica Rainforest"],
-    imageSrc: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-46.webp",
+    imageSrc: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-46.webp",
     imageAlt: "Scenic mountain peaks and rainforest valley",
-    heroImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-46.webp",
+    heroImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-46.webp",
     heroImageAlt: "Scenic mountain peaks and rainforest valley",
-    secondaryImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-55.webp",
+    secondaryImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-55.webp",
     secondaryImageAlt: "Misty mountain peaks at sunrise",
   },
   {
@@ -171,11 +171,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Our travel agent Sylvia Broxston was amazing, she went above and beyond to make sure our holiday was perfect. Thank you Sylvia and Blissful Escapes for making our holiday so special, we will be booking again!",
     highlights: ["Leonardo Cypria Maris Hotel & Spa", "Sea View Suite", "Full Concierge Support"],
-    imageSrc: "/assets/images/testimonials/sheryl-sharratt-cyprus-paphos-resort.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/sheryl-sharratt-cyprus-paphos-resort.webp",
     imageAlt: "Leonardo Cypria Maris Hotel and Spa illuminated at dusk in Paphos Cyprus",
-    heroImage: "/assets/images/testimonials/sheryl-sharratt-cyprus-paphos-resort.webp",
+    heroImage: "/be-v1/assets/images/testimonials/sheryl-sharratt-cyprus-paphos-resort.webp",
     heroImageAlt: "Leonardo Cypria Maris Hotel and Spa illuminated at dusk in Paphos Cyprus",
-    secondaryImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-104.webp",
+    secondaryImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-104.webp",
     secondaryImageAlt: "Turquoise waters and palm resort",
   },
   {
@@ -191,11 +191,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Sylvia took care of everything, offered great advice, and made sure it all went very smoothly, which it did. We had a great holiday in Tenerife, Costa Adeje. Thank you Sylvia, everything you did was very much appreciated!",
     highlights: ["Surprise 50th Birthday Plan", "Costa Adeje Resort Pool", "Ocean Sunset View"],
-    imageSrc: "/assets/images/testimonials/howard-tenerife-resort-sunset.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/howard-tenerife-resort-sunset.webp",
     imageAlt: "Sunset over Costa Adeje resort pool in Tenerife",
-    heroImage: "/assets/images/testimonials/howard-tenerife-resort-sunset.webp",
+    heroImage: "/be-v1/assets/images/testimonials/howard-tenerife-resort-sunset.webp",
     heroImageAlt: "Sunset over Costa Adeje resort pool in Tenerife",
-    secondaryImage: "/assets/images/testimonials/howard-tenerife-pool-daytime.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/howard-tenerife-pool-daytime.webp",
     secondaryImageAlt: "Daytime resort pool surrounded by palm trees in Tenerife",
   },
   {
@@ -211,11 +211,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "From chartered boat trips in emerald coves to traditional seafood dinners overlooking the sea, every recommendation was spot-on.",
     highlights: ["Private Boat Charter", "Greek Seafood Dining", "Emerald Bay Cove"],
-    imageSrc: "/assets/images/testimonials/bethany-flynn-greece-boat-cove.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/bethany-flynn-greece-boat-cove.webp",
     imageAlt: "Private boat anchored in emerald cove in Greece",
-    heroImage: "/assets/images/testimonials/bethany-flynn-greece-boat-cove.webp",
+    heroImage: "/be-v1/assets/images/testimonials/bethany-flynn-greece-boat-cove.webp",
     heroImageAlt: "Private boat anchored in emerald cove in Greece",
-    secondaryImage: "/assets/images/testimonials/bethany-flynn-greece-seafood-lunch.webp",
+    secondaryImage: "/be-v1/assets/images/testimonials/bethany-flynn-greece-seafood-lunch.webp",
     secondaryImageAlt: "Fresh seafood dining by the water in Greece",
   },
   {
@@ -231,11 +231,11 @@ export const testimonials: Testimonial[] = [
     storyDetail:
       "Expert knowledge made all the difference in securing fast-track passes to Sagrada Familia and staying in a fantastic central location.",
     highlights: ["Sagrada Familia VIP Entry", "Boutique Hotel", "Bespoke Travel Guide"],
-    imageSrc: "/assets/images/testimonials/ruby-munro-barcelona-sagrada-familia.webp",
+    imageSrc: "/be-v1/assets/images/testimonials/ruby-munro-barcelona-sagrada-familia.webp",
     imageAlt: "Sagrada Familia towers in Barcelona against blue sky",
-    heroImage: "/assets/images/testimonials/ruby-munro-barcelona-sagrada-familia.webp",
+    heroImage: "/be-v1/assets/images/testimonials/ruby-munro-barcelona-sagrada-familia.webp",
     heroImageAlt: "Sagrada Familia towers in Barcelona against blue sky",
-    secondaryImage: "/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-113.webp",
+    secondaryImage: "/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-113.webp",
     secondaryImageAlt: "Mediterranean town landscape",
   },
 ];

@@ -11,17 +11,17 @@ interface Associate {
 }
 
 const associates: Associate[] = [
-  { name: "Emirates", src: "/assets/images/logo-banner/Emirates-Logo.png", widthClass: "w-28 sm:w-32 lg:w-36" },
+  { name: "Emirates", src: "/be-v1/assets/images/logo-banner/Emirates-Logo.png", widthClass: "w-28 sm:w-32 lg:w-36" },
   {
     name: "Jumeirah",
-    src: "/assets/images/logo-banner/Jumeirah-Logo-Vector.svg-.png",
+    src: "/be-v1/assets/images/logo-banner/Jumeirah-Logo-Vector.svg-.png",
     widthClass: "w-32 sm:w-36 lg:w-40",
   },
-  { name: "Qatar Airways", src: "/assets/images/logo-banner/Qatar-Airways-Logo.png", widthClass: "w-32 sm:w-36 lg:w-40" },
-  { name: "One&Only Resorts", src: "/assets/images/logo-banner/one-and-only-logo.png", widthClass: "w-36 sm:w-40 lg:w-48" },
+  { name: "Qatar Airways", src: "/be-v1/assets/images/logo-banner/Qatar-Airways-Logo.png", widthClass: "w-32 sm:w-36 lg:w-40" },
+  { name: "One&Only Resorts", src: "/be-v1/assets/images/logo-banner/one-and-only-logo.png", widthClass: "w-36 sm:w-40 lg:w-48" },
   {
     name: "Singapore Airlines",
-    src: "/assets/images/logo-banner/Singapore_Airlines_Logo_2.svg.webp",
+    src: "/be-v1/assets/images/logo-banner/Singapore_Airlines_Logo_2.svg.webp",
     widthClass: "w-32 sm:w-36 lg:w-40",
   },
 ];

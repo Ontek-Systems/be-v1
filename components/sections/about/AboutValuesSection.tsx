@@ -30,7 +30,7 @@ export function AboutValuesSection() {
   return (
     <section className="relative overflow-hidden section-y">
       <Image
-        src="/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-83.webp"
+        src="/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-83.webp"
         alt="Malaga waterfront at dusk"
         fill
         sizes="100vw"

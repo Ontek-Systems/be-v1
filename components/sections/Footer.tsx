@@ -7,10 +7,10 @@ import { Logo } from "@/components/ui/Logo";
 import { navLinks } from "@/lib/navLinks";
 
 const legalLogos = [
-  { src: "/assets/images/legalities/ABTA-logo-700x394.jpg", alt: "ABTA", widthClass: "w-36 sm:w-44 lg:w-48" },
-  { src: "/assets/images/legalities/atol-protected-logo-vector-11573957215gb2wlke79a.jpg", alt: "ATOL Protected", widthClass: "w-28 sm:w-32 lg:w-36" },
-  { src: "/assets/images/legalities/IATA_logo.svg.webp", alt: "IATA", widthClass: "w-28 sm:w-32 lg:w-36" },
-  { src: "/assets/images/legalities/atp-global-member-horiz-bg-dune@3x.png", alt: "Advantage Travel Partnership Global Member", widthClass: "w-52 sm:w-60 lg:w-64" },
+  { src: "/be-v1/assets/images/legalities/ABTA-logo-700x394.jpg", alt: "ABTA", widthClass: "w-36 sm:w-44 lg:w-48" },
+  { src: "/be-v1/assets/images/legalities/atol-protected-logo-vector-11573957215gb2wlke79a.jpg", alt: "ATOL Protected", widthClass: "w-28 sm:w-32 lg:w-36" },
+  { src: "/be-v1/assets/images/legalities/IATA_logo.svg.webp", alt: "IATA", widthClass: "w-28 sm:w-32 lg:w-36" },
+  { src: "/be-v1/assets/images/legalities/atp-global-member-horiz-bg-dune@3x.png", alt: "Advantage Travel Partnership Global Member", widthClass: "w-52 sm:w-60 lg:w-64" },
 ];
 
 export function Footer() {

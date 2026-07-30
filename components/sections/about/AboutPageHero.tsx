@@ -8,7 +8,7 @@ export function AboutPageHero() {
   return (
     <section className="relative flex h-dvh min-h-140 items-end overflow-hidden sm:items-center">
       <Image
-        src="/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-48.webp"
+        src="/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-48.webp"
         alt="A winding coastal highway along the California coastline at sunset"
         fill
         priority

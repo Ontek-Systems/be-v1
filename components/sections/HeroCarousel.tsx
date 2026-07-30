@@ -6,18 +6,18 @@ import { CrossfadeBackground } from "@/components/common/CrossfadeBackground";
 const AUTO_ADVANCE_MS = 4000;
 
 const slides = [
-  { src: "/assets/images/hero/barbados-palm-tree-boat.jpg" },
-  { src: "/assets/images/hero/capri-clifftop-terrace.jpg" },
-  { src: "/assets/images/hero/croatia-coastal-village.jpg" },
-  { src: "/assets/images/hero/dubai-palm-jumeirah-aerial.jpg" },
-  { src: "/assets/images/hero/elephants-crossing-river.jpeg" },
-  { src: "/assets/images/hero/grenada-harbor-town.jpg" },
-  { src: "/assets/images/hero/havana-pink-classic-car.jpg" },
-  { src: "/assets/images/hero/jamaica-colorful-hillside.jpg" },
-  { src: "/assets/images/hero/las-vegas-strip-night.jpeg" },
-  { src: "/assets/images/hero/maldives-atoll-aerial.jpeg" },
-  { src: "/assets/images/hero/malta-valletta-harbor.jpg" },
-  { src: "/assets/images/hero/new-orleans-bourbon-street.jpeg" },
+  { src: "/be-v1/assets/images/hero/barbados-palm-tree-boat.jpg" },
+  { src: "/be-v1/assets/images/hero/capri-clifftop-terrace.jpg" },
+  { src: "/be-v1/assets/images/hero/croatia-coastal-village.jpg" },
+  { src: "/be-v1/assets/images/hero/dubai-palm-jumeirah-aerial.jpg" },
+  { src: "/be-v1/assets/images/hero/elephants-crossing-river.jpeg" },
+  { src: "/be-v1/assets/images/hero/grenada-harbor-town.jpg" },
+  { src: "/be-v1/assets/images/hero/havana-pink-classic-car.jpg" },
+  { src: "/be-v1/assets/images/hero/jamaica-colorful-hillside.jpg" },
+  { src: "/be-v1/assets/images/hero/las-vegas-strip-night.jpeg" },
+  { src: "/be-v1/assets/images/hero/maldives-atoll-aerial.jpeg" },
+  { src: "/be-v1/assets/images/hero/malta-valletta-harbor.jpg" },
+  { src: "/be-v1/assets/images/hero/new-orleans-bourbon-street.jpeg" },
 ];
 
 export function HeroCarousel() {

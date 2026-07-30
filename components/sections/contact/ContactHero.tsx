@@ -16,7 +16,7 @@ export function ContactHero() {
         className="absolute inset-0"
       >
         <Image
-          src="/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-20.webp"
+          src="/be-v1/assets/images/ALL-IMAGES/Full%20Images/blissful-escapes-travel-agent-image-20.webp"
           alt="Aerial view of a coastal bay lit up at dusk"
           fill
           priority

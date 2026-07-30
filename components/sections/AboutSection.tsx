@@ -76,7 +76,7 @@ export function AboutSection() {
             */}
             <div className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-[4/5] lg:aspect-[3/4]">
               <Image
-                src="/assets/images/emma.jpg"
+                src="/be-v1/assets/images/emma.jpg"
                 alt="Emma, founder of Blissful Escapes"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

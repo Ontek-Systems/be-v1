@@ -12,8 +12,8 @@ import { useEffect, useState } from "react";
  */
 
 const LOGO_LAYERS = [
-  { src: "/assets/images/logo-svg/title-logo-svg.svg", alt: "Blissful Escapes" },
-  { src: "/assets/images/logo-svg/subtitle-logo-svg.svg", alt: "" },
+  { src: "/be-v1/assets/images/logo-svg/title-logo-svg.svg", alt: "Blissful Escapes" },
+  { src: "/be-v1/assets/images/logo-svg/subtitle-logo-svg.svg", alt: "" },
 ] as const;
 
 interface LoadingScreenProps {
@@ -64,7 +64,7 @@ export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
               {/* Left rule slides in from the left, right rule from the right, so
                   neither ever sweeps across the wordmark. */}
               <motion.img
-                src="/assets/images/logo-svg/lines-logo-svg.svg"
+                src="/be-v1/assets/images/logo-svg/lines-logo-svg.svg"
                 alt=""
                 aria-hidden
                 className="absolute inset-0 h-full w-full"
@@ -78,7 +78,7 @@ export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
                 }}
               />
               <motion.img
-                src="/assets/images/logo-svg/lines-logo-svg.svg"
+                src="/be-v1/assets/images/logo-svg/lines-logo-svg.svg"
                 alt=""
                 aria-hidden
                 className="absolute inset-0 h-full w-full"
