@@ -7,7 +7,7 @@ import { TestimonialsPageContent } from "@/components/sections/testimonials/Test
 export const metadata: Metadata = {
   title: "Client Stories & Reviews | Blissful Escapes",
   description:
-    "Read real client stories and reviews for Blissful Escapes luxury travel consultancy. 5.0 rating on Google & Hays Travel. 100% ABTA & ATOL protected.",
+    "Read real client stories and reviews for Blissful Escapes luxury travel consultancy. 5.0 rating on Google. 100% ABTA & ATOL protected.",
 };
 
 export default function TestimonialsPage() {

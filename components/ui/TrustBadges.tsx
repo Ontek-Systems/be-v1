@@ -1,4 +1,4 @@
-const badges = ["ABTA Protected", "ATOL Bonded", "Hays Travel Independence Group"];
+const badges = ["ABTA Protected", "ATOL Bonded"];
 
 export interface TrustBadgesProps {
   /** "cream" sits on white, "white" sits on a cream or tinted background. */

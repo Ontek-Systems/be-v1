@@ -91,7 +91,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white">
-            &copy; {new Date().getFullYear()} Blissful Escapes. ABTA protected, ATOL bonded, proudly part of the Hays Travel Independence Group. Powered by Holidaysplease.
+            &copy; {new Date().getFullYear()} Blissful Escapes. ABTA protected, ATOL bonded.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
             <a

@@ -20,7 +20,7 @@ export function ContactFaqSection() {
     {
       question: "Is my money safe when booking with you?",
       answer:
-        "Yes, completely. As an independent member of Hays Travel Independence Group, every flight-inclusive package is ATOL protected, and non-flight bookings are ABTA protected.",
+        "Yes, completely. Every flight-inclusive package is ATOL protected, and non-flight bookings are ABTA protected.",
     },
     {
       question: "Can we meet in person or speak outside normal office hours?",
@@ -107,7 +107,7 @@ export function ContactFaqSection() {
 
             <div className="mt-10 pt-6">
               <p className="text-xs text-primary-cream">
-                ABTA Protected · ATOL Bonded · Hays Travel Independence Group Member
+                ABTA Protected · ATOL Bonded
               </p>
             </div>
           </motion.div>

@@ -18,7 +18,7 @@ export function TestimonialsPageHero() {
           </div>
           <span className="h-3 w-px bg-primary-navy/20" aria-hidden="true" />
           <span className="text-xs font-semibold uppercase tracking-wider text-primary-sky">
-            Verified Google & Hays Travel Reviews
+            Verified Google Reviews
           </span>
         </div>
       </Container>
