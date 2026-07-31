@@ -13,7 +13,7 @@ export function DestinationIntro({ intro, countries, bestTime }: Readonly<Destin
   const [lead, ...rest] = intro;
 
   return (
-    <section className="bg-primary-navy section-y-lg">
+    <section className="bg-primary-sky section-y-lg">
       <Container>
         {/* Oversized lead statement */}
         <motion.p

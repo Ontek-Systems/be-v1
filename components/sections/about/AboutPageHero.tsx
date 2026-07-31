@@ -15,7 +15,7 @@ export function AboutPageHero() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-primary-navy via-primary-navy/55 to-primary-navy/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary-sky via-primary-sky/55 to-primary-sky/20" />
 
       <Container className="relative pb-14 sm:pb-0">
         <motion.div

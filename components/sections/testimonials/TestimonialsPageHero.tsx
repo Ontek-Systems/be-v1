@@ -16,7 +16,7 @@ export function TestimonialsPageHero() {
           <div className="flex items-center gap-1 text-primary-gold text-sm font-bold">
             ★★★★★ <span className="text-primary-navy text-xs font-semibold ml-1">5.0 / 5.0</span>
           </div>
-          <span className="h-3 w-px bg-primary-navy/20" aria-hidden="true" />
+          <span className="h-3 w-px bg-primary-sky/20" aria-hidden="true" />
           <span className="text-xs font-semibold uppercase tracking-wider text-primary-sky">
             Verified Google Reviews
           </span>

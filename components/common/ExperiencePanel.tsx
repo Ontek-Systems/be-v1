@@ -29,8 +29,8 @@ export function ExperiencePanel({
   */
   const gradient =
     align === "right"
-      ? "bg-gradient-to-t from-primary-navy via-primary-navy/70 to-transparent sm:bg-gradient-to-l sm:from-primary-navy sm:via-primary-navy/60 sm:to-transparent"
-      : "bg-gradient-to-t from-primary-navy via-primary-navy/70 to-transparent sm:bg-gradient-to-r sm:from-primary-navy sm:via-primary-navy/60 sm:to-transparent";
+      ? "bg-gradient-to-t from-primary-sky via-primary-sky/70 to-transparent sm:bg-gradient-to-l sm:from-primary-sky sm:via-primary-sky/60 sm:to-transparent"
+      : "bg-gradient-to-t from-primary-sky via-primary-sky/70 to-transparent sm:bg-gradient-to-r sm:from-primary-sky sm:via-primary-sky/60 sm:to-transparent";
 
   return (
     <section className="relative flex h-dvh min-h-150 items-end overflow-hidden sm:items-center">

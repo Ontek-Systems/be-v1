@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { NavLink } from "@/components/ui/NavLink";
 import { IconButton } from "@/components/ui/IconButton";
+import { Logo } from "@/components/ui/Logo";
 import { navLinks } from "@/lib/navLinks";
 import { destinationDetails } from "@/lib/destinationDetails";
 import { holidayTypeDetails } from "@/lib/holidayTypeDetails";
@@ -24,14 +25,19 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: shouldReduceMotion ? 0 : "100%", opacity: shouldReduceMotion ? 0 : 1 }}
           transition={{ duration: shouldReduceMotion ? 0.15 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 flex h-dvh w-full flex-col bg-primary-navy px-6 py-5 sm:px-10 sm:py-6 md:hidden"
+          className="fixed inset-0 z-50 flex h-dvh w-full flex-col bg-primary-sky px-6 py-5 sm:px-10 sm:py-6 md:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xl font-display font-bold text-white">Blissful Escapes</span>
-            <IconButton label="Close menu" tone="light" onClick={onClose}>
+            <Logo tone="cream" />
+            <IconButton
+              label="Close menu"
+              tone="light"
+              onClick={onClose}
+              className="bg-transparent! text-white! hover:text-primary-gold!"
+            >
               <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5 fill-none stroke-current">
                 <path d="M4 4L16 16M16 4L4 16" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
@@ -40,7 +46,7 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
 
           <nav className="mt-8 flex-1 overflow-y-auto sm:mt-12">
             {/* min-h-full + justify-center keeps short menus centred while letting tall menus scroll from the top */}
-            <div className="flex min-h-full flex-col justify-center gap-6 py-4 xs:gap-7">
+            <div className="flex min-h-full flex-col items-center justify-center gap-6 py-4 text-center xs:gap-7">
             {navLinks.map((link, index) => (
               <motion.div
                 key={link.href}
@@ -48,10 +54,10 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: shouldReduceMotion ? 0 : 0.08 + index * 0.05, duration: 0.3 }}
               >
-                <NavLink href={link.href} label={link.label} tone="cream" className="text-2xl" onNavigate={onClose} />
+                <NavLink href={link.href} label={link.label} tone="cream" className="text-2xl text-primary-gold! hover:text-white!" onNavigate={onClose} />
 
                 {link.href === "#holiday-types" && (
-                  <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 pl-4">
+                  <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
                     {holidayTypeDetails.map((holidayType) => (
                       <li key={holidayType.slug}>
                         <Link
@@ -60,7 +66,7 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
                             event.preventDefault();
                             onClose();
                           }}
-                          className="text-sm text-primary-sky transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          className="text-sm text-white/85 transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                           {holidayType.name}
                         </Link>
@@ -70,7 +76,7 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
                 )}
 
                 {link.href === "#destinations" && (
-                  <ul className="mt-4 flex flex-col gap-3 pl-4">
+                  <ul className="mt-4 flex flex-col gap-3">
                     {destinationDetails.map((destination) => (
                       <li key={destination.slug}>
                         <Link
@@ -79,7 +85,7 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
                             event.preventDefault();
                             onClose();
                           }}
-                          className="text-base text-primary-sky transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                          className="text-sm text-white/85 transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         >
                           {destination.name}
                         </Link>
@@ -92,7 +98,7 @@ export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelPro
             </div>
           </nav>
 
-          <p className="mt-4 text-sm text-primary-sky">
+          <p className="mt-4 text-center text-sm text-white/85">
             Prefer to talk it through? Call us on 07789 652 136.
           </p>
         </motion.div>

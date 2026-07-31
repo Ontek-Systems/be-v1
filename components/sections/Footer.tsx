@@ -10,12 +10,12 @@ const legalLogos = [
   { src: "/be-v1/assets/images/legalities/ABTA-logo-700x394.jpg", alt: "ABTA", widthClass: "w-36 sm:w-44 lg:w-48" },
   { src: "/be-v1/assets/images/legalities/atol-protected-logo-vector-11573957215gb2wlke79a.jpg", alt: "ATOL Protected", widthClass: "w-28 sm:w-32 lg:w-36" },
   { src: "/be-v1/assets/images/legalities/IATA_logo.svg.webp", alt: "IATA", widthClass: "w-28 sm:w-32 lg:w-36" },
-  { src: "/be-v1/assets/images/legalities/atp-global-member-horiz-bg-dune@3x.png", alt: "Advantage Travel Partnership Global Member", widthClass: "w-52 sm:w-60 lg:w-64" },
+  { src: "/be-v1/assets/images/legalities/atp-global-member-horiz-bg-dune@3x.png", alt: "Advantage Travel Partnership Global Member", widthClass: "w-52 sm:w-60 lg:w-64", bare: true },
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-primary-navy pb-8 sm:pb-10">
+    <footer className="bg-primary-sky pb-8 sm:pb-10">
       <div className="pt-16 sm:pt-20">
       <Container>
         {/* Top row */}
@@ -79,7 +79,10 @@ export function Footer() {
         {/* Legal / accreditation logos */}
         <div className="mt-14 flex flex-wrap items-center justify-center gap-8 sm:gap-10 lg:gap-12">
           {legalLogos.map((logo) => (
-            <div key={logo.alt} className={`relative h-16 sm:h-20 lg:h-24 ${logo.widthClass} bg-white p-2.5`}>
+            <div
+              key={logo.alt}
+              className={`relative h-16 sm:h-20 lg:h-24 ${logo.widthClass} ${logo.bare ? "" : "bg-white p-2.5"}`}
+            >
               <Image src={logo.src} alt={logo.alt} fill sizes="256px" className="object-contain" />
             </div>
           ))}
@@ -91,7 +94,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white">
-            &copy; {new Date().getFullYear()} Blissful Escapes. ABTA protected, ATOL bonded.
+            &copy; {new Date().getFullYear()} Blissfulescapes Limited. Company number 14089700.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
             <a

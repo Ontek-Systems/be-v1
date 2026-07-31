@@ -25,7 +25,7 @@ export function ContactHero() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-navy/60 via-primary-navy/40 to-primary-navy/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-sky/60 via-primary-sky/40 to-primary-sky/85" />
 
       {/* Oversized watermark text */}
       <span

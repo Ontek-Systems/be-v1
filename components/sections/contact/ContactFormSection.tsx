@@ -25,7 +25,7 @@ const reasons = [
 
 export function ContactFormSection() {
   return (
-    <section id="contact-form" className="section-y-lg bg-primary-sky">
+    <section id="contact-form" className="section-y-lg bg-primary-navy">
       <Container>
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
           <motion.div
@@ -33,18 +33,19 @@ export function ContactFormSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: "easeOut" }}
+            className="text-center lg:text-left"
           >
-            <SectionEyebrow>Start Planning Your Escape</SectionEyebrow>
-            <Heading as="h2" size="lg">
+            <SectionEyebrow dark>Start Planning Your Escape</SectionEyebrow>
+            <Heading as="h2" size="lg" className="text-white">
               Tell us what you have in mind
             </Heading>
-            <Text size="lg" className="mt-[13px] text-primary-navy">
+            <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-cream lg:mx-0 lg:max-w-none">
               No commitment, just a conversation about where you want to go and what matters most. Fill in as much or as little as you like, and we will get back to you with ideas.
             </Text>
 
             <TripEnquiryForm
               idPrefix="contact-page"
-              className="mt-10"
+              className="mt-10 text-left"
               successBody="We have received your travel details and will be in touch within 24 to 48 hours. In the meantime, if anything changes or you would like to speak sooner, feel free to call us on"
             />
           </motion.div>
@@ -75,7 +76,7 @@ export function ContactFormSection() {
               </ul>
             </div>
 
-            <div className="h-px w-full bg-primary-sky/30" />
+            <div className="h-px w-full bg-primary-navy/20" />
 
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-navy">

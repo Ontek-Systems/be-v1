@@ -119,10 +119,10 @@ export function DatePicker({
           }}
           className={`w-full py-3.5 pl-4 pr-11 text-base outline-none transition-shadow duration-200 ${
             isOnImage
-              ? "bg-primary-navy/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
+              ? "bg-primary-sky/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
               : tone === "onWhite"
-                ? "bg-white text-primary-navy placeholder:text-primary-sky shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-                : "bg-primary-cream text-primary-navy placeholder:text-primary-sky shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
+                ? "bg-white text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
+                : "bg-primary-cream text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
           }`}
         />
         <button
@@ -130,7 +130,7 @@ export function DatePicker({
           aria-label={isOpen ? "Close calendar" : "Open calendar"}
           onClick={() => setIsOpen((current) => !current)}
           className={`absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer transition-colors duration-150 ${
-            isOnImage ? "text-primary-sky hover:text-white" : "text-primary-sky hover:text-primary-navy"
+            isOnImage ? "text-primary-sky hover:text-white" : "text-primary-navy/60 hover:text-primary-navy"
           }`}
         >
           <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5 fill-none stroke-current">
@@ -148,7 +148,7 @@ export function DatePicker({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-primary-navy px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-primary-sky px-4"
           >
             <motion.div
               onClick={(event) => event.stopPropagation()}

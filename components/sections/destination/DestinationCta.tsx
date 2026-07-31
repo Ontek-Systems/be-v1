@@ -15,7 +15,7 @@ export function DestinationCta({ name, imageSrc, imageAlt }: Readonly<Destinatio
   return (
     <section className="relative flex h-dvh min-h-140 items-center justify-center overflow-hidden">
       <ParallaxImage src={imageSrc} alt={imageAlt} strength={14} />
-      <div className="absolute inset-0 bg-primary-navy/70" />
+      <div className="absolute inset-0 bg-primary-sky/70" />
 
       <Container className="relative text-center">
         <motion.div

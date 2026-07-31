@@ -6,8 +6,8 @@ export const buttonBase =
   "group relative inline-flex cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-200 ease-out active:scale-[0.98] sm:px-8 sm:py-4 sm:text-base";
 
 export const buttonVariants = {
-  primary: "bg-primary-navy text-white",
-  ghost: "bg-transparent text-primary-navy hover:bg-primary-navy hover:text-white",
+  primary: "bg-primary-sky text-white",
+  ghost: "bg-transparent text-primary-navy hover:bg-primary-sky hover:text-white",
   gold: "bg-primary-gold text-primary-navy hover:bg-white hover:text-primary-navy",
 } as const;
 

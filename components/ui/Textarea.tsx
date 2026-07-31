@@ -9,7 +9,7 @@ export function Textarea({ tone = "default", className = "", ...rest }: Readonly
 
   return (
     <textarea
-      className={`w-full resize-none px-4 py-3.5 text-base text-primary-navy outline-none transition-shadow duration-200 placeholder:text-primary-sky shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] ${toneClasses} ${className}`}
+      className={`w-full resize-none px-4 py-3.5 text-base text-primary-navy outline-none transition-shadow duration-200 placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] ${toneClasses} ${className}`}
       {...rest}
     />
   );

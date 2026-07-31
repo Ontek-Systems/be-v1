@@ -55,7 +55,7 @@ export function GalleryLightbox({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: shouldReduceMotion ? 0.1 : 0.25 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-primary-navy"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-primary-sky"
           role="dialog"
           aria-modal="true"
           aria-label="Photo lightbox"

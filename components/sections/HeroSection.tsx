@@ -32,7 +32,7 @@ export function HeroSection() {
                   </p>
                   <Heading
                     as="h1"
-                    className="mt-4 text-[2.0625rem] leading-[0.88] text-white xs:text-[2.475rem] sm:text-[3.3rem] lg:text-[4.125rem]"
+                    className="mt-4 text-[2.0625rem] leading-[0.99]! text-white xs:text-[2.475rem] sm:text-[3.3rem] lg:text-[4.125rem]"
                   >
                     Plan your next escape with us.
                   </Heading>

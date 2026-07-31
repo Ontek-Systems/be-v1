@@ -29,7 +29,7 @@ export function TestimonialsPageContent() {
               onClick={() => setSelectedCategory(cat)}
               className={`cursor-pointer px-4.5 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
                 selectedCategory === cat
-                  ? "bg-primary-navy text-white"
+                  ? "bg-primary-sky text-white"
                   : "bg-white text-primary-navy/70 hover:bg-primary-cream hover:text-primary-navy"
               }`}
             >
@@ -53,7 +53,7 @@ export function TestimonialsPageContent() {
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.65, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   className={`relative overflow-hidden p-8 sm:p-12 lg:p-16 ${
-                    isDark ? "bg-primary-navy text-white" : "bg-white text-primary-navy"
+                    isDark ? "bg-primary-sky text-white" : "bg-white text-primary-navy"
                   }`}
                 >
                   {/* Watermark Quote Symbol */}
@@ -115,7 +115,7 @@ export function TestimonialsPageContent() {
                           sizes="(max-width: 1024px) 100vw, 500px"
                           className="object-cover transition-transform duration-700 hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/40 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary-sky/40 via-transparent to-transparent" />
                         <span className="absolute bottom-3 left-3 text-xs text-white font-medium drop-shadow-md">
                           {item.destination}
                         </span>

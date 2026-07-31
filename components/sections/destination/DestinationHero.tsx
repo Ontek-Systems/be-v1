@@ -34,7 +34,7 @@ export function DestinationHero({
         <Image src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover" />
       </motion.div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-navy/50 via-primary-navy/20 to-primary-navy/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-sky/50 via-primary-sky/20 to-primary-sky/85" />
 
       {/* Oversized watermark word, centred behind the title */}
       <span

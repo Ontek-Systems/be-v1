@@ -12,7 +12,7 @@ export function HolidayTypeIntro({ intro, idealFor }: Readonly<HolidayTypeIntroP
   const [lead, ...rest] = intro;
 
   return (
-    <section className="bg-primary-navy section-y-lg">
+    <section className="bg-primary-sky section-y-lg">
       <Container>
         {/* Oversized lead statement */}
         <motion.p

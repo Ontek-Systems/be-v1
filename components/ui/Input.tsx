@@ -7,10 +7,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Input({ tone = "default", className = "", ...rest }: Readonly<InputProps>) {
   const toneClasses =
     tone === "onImage"
-      ? "bg-primary-navy/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
+      ? "bg-primary-sky/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
       : tone === "onWhite"
-        ? "bg-white text-primary-navy placeholder:text-primary-sky shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-        : "bg-primary-cream text-primary-navy placeholder:text-primary-sky shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
+        ? "bg-white text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
+        : "bg-primary-cream text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
 
   return (
     <input

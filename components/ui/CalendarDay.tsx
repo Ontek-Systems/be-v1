@@ -31,7 +31,7 @@ export function CalendarDay({
           ? "cursor-not-allowed text-primary-sky"
           : "cursor-pointer text-primary-navy hover:bg-primary-sky hover:text-white"
       } ${isSelected ? "bg-primary-gold font-semibold hover:bg-primary-gold hover:text-primary-navy" : ""} ${
-        isToday && !isSelected ? "shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]" : ""
+        isToday && !isSelected ? "shadow-[inset_0_-2px_0_0_var(--color-primary-sky)]" : ""
       }`}
     >
       {label}

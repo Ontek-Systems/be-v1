@@ -40,13 +40,17 @@ export function DestinationIndexRow({
         onFocus={onActivate}
         className="group block py-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-navy sm:py-7"
       >
-        <div className="flex items-baseline gap-4 sm:gap-6">
-          <span className="text-sm font-semibold tabular-nums text-primary-sky transition-colors duration-300">
+        <div className="flex flex-col items-center gap-4 text-center lg:flex-row lg:items-baseline lg:gap-6 lg:text-left">
+          <span className="relative mb-5 inline-block w-fit font-sans text-[0.64rem] font-bold uppercase tabular-nums tracking-[0.207em] text-[#1e1d1c] transition-colors duration-300 lg:mb-0 lg:text-sm lg:font-semibold lg:tracking-normal lg:text-primary-sky">
             {String(displayIndex + 1).padStart(2, "0")}
+            <span
+              aria-hidden="true"
+              className="absolute bottom-[-0.35em] left-0 h-[2px] w-full bg-primary-gold lg:hidden"
+            />
           </span>
 
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center justify-between gap-x-6">
+          <div className="w-full min-w-0 lg:flex-1">
+            <div className="flex items-center justify-center gap-x-6 lg:justify-between">
               <h3
                 className={`font-display text-3xl font-bold tracking-tight transition-colors duration-300 ease-out sm:text-4xl lg:text-5xl ${
                   isActive ? "text-primary-navy" : "text-primary-sky/75 group-hover:text-primary-navy"
@@ -56,19 +60,24 @@ export function DestinationIndexRow({
               </h3>
             </div>
 
-            {/* Mobile only: inline image + tagline preview */}
-            <div className="mt-4 lg:hidden">
-              <div className="relative aspect-16/9 w-full overflow-hidden">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  sizes="100vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent to-33%" />
-              </div>
-              <p className="mt-3 text-sm text-primary-navy/80 leading-relaxed">{tagline}</p>
+            {/* Phone and tablet: tagline sits under the name */}
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-primary-navy/80 lg:hidden">
+              {tagline}
+            </p>
+
+            {/* Phone and tablet: image sits below the text */}
+            <div className="relative mt-5 aspect-4/3 w-full overflow-hidden shadow-md sm:aspect-16/9 lg:hidden">
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                sizes="100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/80 to-transparent to-55%" />
+              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[0.64rem] font-bold uppercase tracking-[0.207em] text-primary-gold">
+                Explore Region
+              </span>
             </div>
 
             {/* Desktop: tagline reveals cleanly on active */}
@@ -102,7 +111,7 @@ export function DestinationIndexRow({
         {/* Divider line */}
         <div
           className={`mt-6 h-px w-full origin-left transition-colors duration-300 sm:mt-7 ${
-            isActive ? "bg-primary-navy" : "bg-primary-sky/40"
+            isActive ? "bg-primary-sky" : "bg-primary-sky/40"
           }`}
         />
       </Link>

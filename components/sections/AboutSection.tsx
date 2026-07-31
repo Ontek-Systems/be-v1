@@ -30,13 +30,14 @@ export function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center lg:text-left"
           >
             <SectionEyebrow>About Us</SectionEyebrow>
             <Heading as="h2" size="lg">
               We plan the holidays we would want to take ourselves.
             </Heading>
 
-            <div className="mt-[22px] space-y-5">
+            <div className="mx-auto mt-[22px] max-w-2xl space-y-5 lg:mx-0 lg:max-w-none">
               <Text size="base" className="text-primary-navy leading-relaxed">
                 Blissful Escapes is run out of Ormskirk, Lancashire, right between Liverpool and Manchester, by someone who has spent the last four years doing one thing properly: planning proper holidays for people who deserve better than a brochure. No call centre, no script, just straight talking and a lot of graft behind the scenes.
               </Text>
@@ -49,7 +50,7 @@ export function AboutSection() {
             </div>
 
             {/* Credentials row */}
-            <div className="mt-10 flex flex-wrap gap-8">
+            <div className="mt-10 flex flex-wrap justify-center gap-8 lg:justify-start">
               {credentials.map((cred) => (
                 <div key={cred.label}>
                   <p className="font-display text-3xl font-bold text-primary-navy">{cred.value}</p>
@@ -58,7 +59,7 @@ export function AboutSection() {
               ))}
             </div>
 
-            <TrustBadges className="mt-8" />
+            <TrustBadges className="mt-8 justify-center lg:justify-start" />
           </motion.div>
 
           {/* Image, right on desktop, video ready slot */}
@@ -67,7 +68,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="relative"
+            className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mx-0 lg:max-w-none"
           >
             {/*
               Video-ready slot: swap the inner <Image> for a <video> element

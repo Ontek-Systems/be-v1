@@ -17,7 +17,7 @@ export function NavLink({ href, label, tone = "brown", className = "", onNavigat
   const pathname = usePathname();
   const idleColor = tone === "brown" ? "text-primary-navy" : "text-white";
   const hoverColor = tone === "brown" ? "hover:text-primary-sky" : "hover:text-primary-gold";
-  const underlineColor = tone === "brown" ? "bg-primary-navy" : "bg-primary-gold";
+  const underlineColor = tone === "brown" ? "bg-primary-sky" : "bg-primary-gold";
 
   // Hash links only scroll in place on the homepage — anywhere else, fall
   // through to a normal navigation to "/" + hash so the target still exists.

@@ -17,7 +17,7 @@ const underlineClasses: Record<NonNullable<SectionEyebrowProps["underlineColor"]
   sky: "bg-primary-sky",
   gold: "bg-primary-gold",
   cream: "bg-primary-cream",
-  navy: "bg-primary-navy",
+  navy: "bg-primary-sky",
 };
 
 /**

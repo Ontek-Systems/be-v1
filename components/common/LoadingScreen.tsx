@@ -37,7 +37,7 @@ export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
       {visible && (
         <motion.div
           key="loading-screen"
-          className="fixed inset-0 z-100 flex items-center justify-center bg-primary-navy"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-primary-sky"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}

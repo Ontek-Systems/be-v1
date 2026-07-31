@@ -18,12 +18,12 @@ export function DestinationsSection() {
   return (
     <section id="destinations" className="section-y">
       <Container>
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-12 text-center sm:mb-16 lg:text-left">
           <SectionEyebrow>Where in the world?</SectionEyebrow>
           <Heading as="h2" size="lg">
             Four regions, known inside out
           </Heading>
-          <Text size="lg" className="mt-[13px] max-w-2xl text-primary-navy">
+          <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-navy lg:mx-0">
             We plan across a handful of places we know really well, rather than offering everywhere and knowing nowhere properly. Hover a region to get a feel for it, then click through to see how we would shape the trip.
           </Text>
         </div>

@@ -9,8 +9,8 @@ import { TripEnquiryForm } from "@/components/common/TripEnquiryForm";
 
 const contactMethods = [
   {
-    href: "mailto:enquiries@blissfulescapes.co.uk",
-    label: "enquiries@blissfulescapes.co.uk",
+    href: "mailto:emma@blissfulescapes.co.uk",
+    label: "emma@blissfulescapes.co.uk",
     icon: (
       <svg viewBox="0 0 20 16" aria-hidden="true" className="h-4 w-5 fill-none stroke-current">
         <path d="M1 1H19V15H1V1Z M1 1L10 9L19 1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -21,7 +21,7 @@ const contactMethods = [
 
 export function ContactSection() {
   return (
-    <section id="contact" className="section-y bg-primary-sky">
+    <section id="contact" className="section-y bg-primary-navy">
       <Container>
         <div className="mx-auto max-w-3xl">
           <motion.div
@@ -62,7 +62,7 @@ export function ContactSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-12 flex flex-col gap-3 sm:flex-row sm:justify-center sm:gap-10"
+            className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-10"
           >
             {contactMethods.map((method) => (
               <a

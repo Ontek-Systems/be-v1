@@ -35,7 +35,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-primary-navy">
+      <header className="sticky top-0 z-40 bg-primary-sky">
         <Container className="flex items-center justify-between py-2">
           <Logo tone="cream" />
 
@@ -87,7 +87,7 @@ export function Header() {
             label="Open menu"
             tone="light"
             onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden"
+            className="md:hidden bg-transparent! text-white! hover:text-primary-gold!"
           >
             <svg viewBox="0 0 20 14" aria-hidden="true" className="h-4 w-5 fill-none stroke-current">
               <path d="M0 1H20M0 7H20M0 13H20" strokeWidth="1.5" strokeLinecap="round" />

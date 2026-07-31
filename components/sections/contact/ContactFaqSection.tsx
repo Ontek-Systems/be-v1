@@ -59,7 +59,7 @@ export function ContactFaqSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-            className="flex flex-col justify-between bg-primary-navy p-8 sm:p-12 text-white"
+            className="flex flex-col justify-between bg-primary-sky p-8 sm:p-12 text-white"
           >
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary-gold">
@@ -90,8 +90,8 @@ export function ContactFaqSection() {
                 <div>
                   <p className="font-semibold uppercase tracking-wider text-white text-xs">Email Enquiries</p>
                   <p className="mt-1 font-medium text-white text-base">
-                    <a href="mailto:enquiries@blissfulescapes.co.uk" className="hover:text-primary-gold transition-colors">
-                      enquiries@blissfulescapes.co.uk
+                    <a href="mailto:emma@blissfulescapes.co.uk" className="hover:text-primary-gold transition-colors">
+                      emma@blissfulescapes.co.uk
                     </a>
                   </p>
                 </div>

@@ -13,11 +13,11 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 export function Select({ options, tone = "default", className = "", ...rest }: Readonly<SelectProps>) {
   const fieldClasses =
     tone === "onImage"
-      ? "bg-primary-navy/20 text-white shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
+      ? "bg-primary-sky/20 text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
       : tone === "onWhite"
-        ? "bg-white text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-        : "bg-primary-cream text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
-  const arrowClasses = tone === "onImage" ? "fill-white" : "fill-primary-sky";
+        ? "bg-white text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
+        : "bg-primary-cream text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
+  const arrowClasses = tone === "onImage" ? "fill-white" : "fill-primary-navy";
 
   return (
     <div className="relative">

@@ -41,12 +41,12 @@ export function GallerySection() {
   return (
     <section id="gallery" className="section-y bg-primary-cream">
       <Container>
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-12 text-center sm:mb-16 lg:text-left">
           <SectionEyebrow>A glimpse of what awaits</SectionEyebrow>
           <Heading as="h2" size="lg">
             Beaches, Balloons and Bucket Lists
           </Heading>
-          <Text size="lg" className="mt-[13px] max-w-2xl text-primary-navy">
+          <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-navy lg:mx-0">
             A small selection from the trips we have helped plan. Every photograph represents a real journey, a real client, a real moment.
           </Text>
         </div>
@@ -72,7 +72,7 @@ export function GallerySection() {
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-108"
               />
-              <div className="absolute inset-0 bg-transparent transition-colors duration-300 group-hover:bg-primary-navy/30" />
+              <div className="absolute inset-0 bg-transparent transition-colors duration-300 group-hover:bg-primary-sky/30" />
             </motion.button>
           ))}
         </div>

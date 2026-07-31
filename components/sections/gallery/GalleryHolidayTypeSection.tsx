@@ -31,7 +31,7 @@ export function GalleryHolidayTypeSection({
     })),
   ];
 
-  const bgClasses = tone === "dark" ? "bg-primary-navy text-white" : "bg-primary-cream text-primary-navy";
+  const bgClasses = tone === "dark" ? "bg-primary-sky text-white" : "bg-primary-cream text-primary-navy";
   const subTagColor = tone === "dark" ? "text-primary-gold" : "text-primary-sky";
   const bodyTextColor = tone === "dark" ? "text-primary-cream" : "text-primary-navy/80";
   const underlineColor = tone === "dark" ? "gold" : "sky";

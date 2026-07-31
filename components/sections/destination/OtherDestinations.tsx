@@ -42,7 +42,7 @@ export function OtherDestinations({ currentSlug }: Readonly<OtherDestinationsPro
                   sizes="(max-width: 640px) 100vw, 33vw"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-navy via-primary-navy/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-sky via-primary-sky/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                   <p className="font-display text-xl font-bold text-white sm:text-2xl">{destination.name}</p>
                   <p className="mt-1 text-sm text-primary-cream">{destination.region}</p>

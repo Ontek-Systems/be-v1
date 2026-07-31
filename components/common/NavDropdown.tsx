@@ -39,7 +39,7 @@ export function NavDropdown({
   const resolvedHref = href.startsWith("#") && !isHomepage ? `/${href}` : href;
   const idleColor = tone === "brown" ? "text-primary-navy" : "text-white";
   const hoverColor = tone === "brown" ? "hover:text-primary-sky" : "hover:text-primary-gold";
-  const underlineColor = tone === "brown" ? "bg-primary-navy" : "bg-primary-gold";
+  const underlineColor = tone === "brown" ? "bg-primary-sky" : "bg-primary-gold";
 
   const open = () => {
     clearTimeout(closeTimeoutRef.current);

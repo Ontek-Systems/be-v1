@@ -96,7 +96,7 @@ export function TripEnquiryForm({
         className={`mx-auto max-w-2xl bg-primary-cream p-10 text-center sm:p-14 ${className}`}
       >
         <div className="mb-6 inline-flex items-center justify-center bg-white p-5">
-          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-8 w-8 fill-none stroke-primary-navy">
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="h-8 w-8 fill-none stroke-primary-sky">
             <path d="M4 12L9 17L20 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
@@ -240,7 +240,7 @@ export function TripEnquiryForm({
             Could you pop in your name and email? We just need those two to get back to you.
           </p>
         )}
-        <Button type="submit" className="mx-auto">
+        <Button type="submit" className="mx-auto bg-primary-navy!">
           Send my travel details
         </Button>
       </div>

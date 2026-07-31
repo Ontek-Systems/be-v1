@@ -36,7 +36,7 @@ export function AboutValuesSection() {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-primary-navy/80" />
+      <div className="absolute inset-0 bg-primary-sky/80" />
 
       <Container className="relative">
         <motion.div

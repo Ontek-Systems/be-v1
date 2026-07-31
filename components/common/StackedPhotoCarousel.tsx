@@ -130,7 +130,7 @@ export function StackedPhotoCarousel({ photos, tone = "dark" }: Readonly<Stacked
                 transformOrigin: "center center",
               }}
             >
-              <div className="relative h-full w-full overflow-hidden bg-primary-navy/10">
+              <div className="relative h-full w-full overflow-hidden bg-primary-sky/10">
                 <Image
                   src={photo.src}
                   alt={photo.alt}
@@ -139,7 +139,7 @@ export function StackedPhotoCarousel({ photos, tone = "dark" }: Readonly<Stacked
                   className="object-cover"
                   priority={i === 0}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/60 via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-sky/60 via-transparent to-transparent opacity-80" />
 
                 {isTop && photo.title && (
                   <motion.div
@@ -187,10 +187,10 @@ export function StackedPhotoCarousel({ photos, tone = "dark" }: Readonly<Stacked
                   dotIdx === index
                     ? tone === "dark"
                       ? "w-6 bg-primary-gold"
-                      : "w-6 bg-primary-navy"
+                      : "w-6 bg-primary-sky"
                     : tone === "dark"
                     ? "w-1.5 bg-white/30"
-                    : "w-1.5 bg-primary-navy/20"
+                    : "w-1.5 bg-primary-sky/20"
                 }`}
               />
             </button>
