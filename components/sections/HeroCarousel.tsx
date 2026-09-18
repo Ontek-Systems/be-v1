@@ -8,16 +8,19 @@ import { basePath } from "@/lib/siteConfig";
 const AUTO_ADVANCE_MS = 4000;
 
 const slides = [
+  { src: `${basePath}/assets/images/holiday-types/Luxury Holiday/pexels-quang-nguyen-vinh-222549-12387908.webp` },
   { src: `${basePath}/assets/images/hero/maldives-atoll-aerial.webp` },
-  { src: `${basePath}/assets/images/destinations/africa/acacia-sunset.webp` },
-  { src: `${basePath}/assets/images/destinations/north-america/horseshoe-bend.webp` },
-  { src: `${basePath}/assets/images/destinations/southeast-asia/longtail-boat-limestone.webp` },
-  { src: `${basePath}/assets/images/destinations/oceania/queenstown-lake-wakatipu.webp` },
+  { src: `${basePath}/assets/images/holiday-types/Solo Holiday/pexels-pavel-danilyuk-9064214.webp` },
   { src: `${basePath}/assets/images/destinations/middle-east/burj-al-arab-coast.webp` },
+  { src: `${basePath}/assets/images/holiday-types/Villa Holiday/pexels-mikhail-nilov-8332961.webp` },
+  { src: `${basePath}/assets/images/destinations/southeast-asia/longtail-boat-limestone.webp` },
+  { src: `${basePath}/assets/images/holiday-types/Solo Holiday/pexels-riciardus-871060.webp` },
   { src: `${basePath}/assets/images/destinations/africa/elephants-savannah.webp` },
+  { src: `${basePath}/assets/images/holiday-types/Villa Holiday/pexels-asadphoto-3319699.webp` },
+  { src: `${basePath}/assets/images/destinations/oceania/queenstown-lake-wakatipu.webp` },
+  { src: `${basePath}/assets/images/holiday-types/misc/family-jetty-sunset.webp` },
   { src: `${basePath}/assets/images/destinations/southeast-asia/vietnam-valley-sunrise.webp` },
-  { src: `${basePath}/assets/images/destinations/indian-ocean/overwater-villas-heron.webp` },
-  { src: `${basePath}/assets/images/destinations/oceania/south-island-mountains.webp` },
+  { src: `${basePath}/assets/images/holiday-types/misc/solo-poolside-sun-hat.webp` },
 ];
 
 export function HeroCarousel() {
