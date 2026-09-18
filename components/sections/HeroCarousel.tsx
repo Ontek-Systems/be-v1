@@ -10,7 +10,7 @@ const AUTO_ADVANCE_MS = 4000;
 const slides = [
   { src: `${basePath}/assets/images/holiday-types/Luxury Holiday/pexels-quang-nguyen-vinh-222549-12387908.webp` },
   { src: `${basePath}/assets/images/hero/maldives-atoll-aerial.webp` },
-  { src: `${basePath}/assets/images/holiday-types/Solo Holiday/pexels-pavel-danilyuk-9064214.webp` },
+  { src: `${basePath}/assets/images/holiday-types/misc/villa-terrace-infinity-pool-dusk.webp` },
   { src: `${basePath}/assets/images/destinations/middle-east/burj-al-arab-coast.webp` },
   { src: `${basePath}/assets/images/holiday-types/Villa Holiday/pexels-mikhail-nilov-8332961.webp` },
   { src: `${basePath}/assets/images/destinations/southeast-asia/longtail-boat-limestone.webp` },
