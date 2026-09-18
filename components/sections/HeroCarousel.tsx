@@ -8,17 +8,16 @@ import { basePath } from "@/lib/siteConfig";
 const AUTO_ADVANCE_MS = 4000;
 
 const slides = [
-  { src: `${basePath}/assets/images/hero/santorini-caldera-terrace.webp` },
-  { src: `${basePath}/assets/images/hero/capri-clifftop-terrace.webp` },
-  { src: `${basePath}/assets/images/hero/manarola-cinque-terre.webp` },
-  { src: `${basePath}/assets/images/hero/portofino-harbour-front.webp` },
   { src: `${basePath}/assets/images/hero/maldives-atoll-aerial.webp` },
-  { src: `${basePath}/assets/images/destinations/europe/positano-amalfi-coast.webp` },
-  { src: `${basePath}/assets/images/hero/dubrovnik-old-town-aerial.webp` },
-  { src: `${basePath}/assets/images/hero/grenada-harbor-town.webp` },
-  { src: `${basePath}/assets/images/hero/venice-rialto-grand-canal.webp` },
+  { src: `${basePath}/assets/images/destinations/africa/acacia-sunset.webp` },
+  { src: `${basePath}/assets/images/destinations/north-america/horseshoe-bend.webp` },
+  { src: `${basePath}/assets/images/destinations/southeast-asia/longtail-boat-limestone.webp` },
   { src: `${basePath}/assets/images/destinations/oceania/queenstown-lake-wakatipu.webp` },
-  { src: `${basePath}/assets/images/hero/valletta-skyline.webp` },
+  { src: `${basePath}/assets/images/destinations/middle-east/burj-al-arab-coast.webp` },
+  { src: `${basePath}/assets/images/destinations/africa/elephants-savannah.webp` },
+  { src: `${basePath}/assets/images/destinations/southeast-asia/vietnam-valley-sunrise.webp` },
+  { src: `${basePath}/assets/images/destinations/indian-ocean/overwater-villas-heron.webp` },
+  { src: `${basePath}/assets/images/destinations/oceania/south-island-mountains.webp` },
 ];
 
 export function HeroCarousel() {
