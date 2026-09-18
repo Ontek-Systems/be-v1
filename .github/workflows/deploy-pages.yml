@@ -21,9 +21,26 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       - run: npm ci
       - run: npm run build
+        env:
+          # Set these as repository variables (Settings > Secrets and variables
+          # > Actions > Variables). Both are read at build time only, because
+          # the site is exported as static files.
+          #
+          # NEXT_PUBLIC_API_URL: without it the built bundle asks every
+          #   visitor's own machine for the API on localhost:5000, so the
+          #   enquiry form cannot work.
+          # NEXT_PUBLIC_SITE_URL: the canonical origin. Left unset, the build
+          #   treats itself as the preview and serves robots.txt as Disallow: /
+          #   so this copy cannot outrank the real domain.
+          # NEXT_PUBLIC_BASE_PATH: the sub path the site is served from. Falls
+          #   back to /be-v1 for the Pages project URL. Set it to "/" once the
+          #   site moves to its own domain.
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '/be-v1' }}
+          NEXT_PUBLIC_API_URL: ${{ vars.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

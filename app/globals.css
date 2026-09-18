@@ -6,7 +6,20 @@
   --color-primary-gold: #e6be48;
   --color-primary-cream: #effcff;
 
+  /* The contact band above the header. Sits between navy and sky: a gentle step
+     down from the nav bar rather than a hard edge, while carrying white text at
+     4.8:1. */
+  --color-primary-band: #47788f;
+
+  /* WhatsApp brand green, used only for the floating WhatsApp button. */
+  --color-whatsapp: #25d366;
+
   --breakpoint-xs: 22.5rem;
+
+  /* Height of the contact band plus the nav bar. Measured at runtime by the
+     Header and written back onto :root; this is only the pre hydration guess,
+     used so the hero does not jump on first paint. */
+  --header-total: 7.5rem;
 
   /* Inter is the text face, Woodland the display face. */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -18,6 +31,8 @@ body {
   font-optical-sizing: auto;
 }
 
+/* Unlayered, so it outranks every Tailwind filter utility. An image that
+   needs its own filter has to use the important modifier, e.g. saturate-[1.2]! */
 img {
   filter: saturate(1.1);
 }
@@ -63,10 +78,63 @@ img {
   }
 }
 
+/* The scrim over every image card that carries text at its foot: cards,
+   carousel slides, the destinations preview. Black rather than navy, see the
+   "No pure black" note in CLAUDE.md. Solid 85% black at the bottom edge,
+   fading to nothing at 40% of the card's height, so the top 60% of the
+   photograph is untouched. */
+@utility card-scrim {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, rgb(0 0 0 / 0.85), transparent 40%);
+}
+
+/* The shadow under hero type, and under the text on every image card
+   (holiday types, regions, destinations, reviews), so it reads over any photo. Three stacked
+   shadows: a wide, soft spread carrying most of the weight, a second pass over
+   it for depth, and a tight one hugging the letters. Without the tight layer
+   the soft spread vanished over busy, mid toned photographs such as the Luxury
+   Holidays hero, and the type looked as if it had no shadow at all. */
+@utility hero-text-shadow {
+  filter: drop-shadow(0 3.36px 24.02px rgb(0 0 0 / 0.9)) drop-shadow(0 3.36px 24.02px rgb(0 0 0 / 0.18)) drop-shadow(0 1px 4px rgb(0 0 0 / 0.75));
+}
+
+/* Hero titles only: the card shadow at 90% strength, because the big
+   display type carries more ink and read heavier than the lines under it. */
+@utility hero-title-shadow {
+  filter: drop-shadow(0 3.36px 24.02px rgb(0 0 0 / 0.81)) drop-shadow(0 3.36px 24.02px rgb(0 0 0 / 0.16)) drop-shadow(0 1px 4px rgb(0 0 0 / 0.675));
+}
+
+/* The smaller hero type: tagline, intro and footnote. A drop shadow filter
+   on thin Inter barely shows, because there is so little ink to cast from, so
+   this is a stacked text shadow instead: a tight dark edge, then a halo that
+   builds up through wider layers. Kept light, so it sits level with the
+   heading's shadow rather than reading as a dark band behind the lines. */
+@utility hero-text-shadow-strong {
+  text-shadow: 0 0 2px rgb(0 0 0 / 0.6), 0 1px 5px rgb(0 0 0 / 0.5), 0 0 14px rgb(0 0 0 / 0.4), 0 2px 30px rgb(0 0 0 / 0.35);
+}
+
+
+/* ---------------------------------------------------------------
+   Anchor offset.
+
+   Every in page link lands on a section that sits under the fixed
+   header stack, so each one reserves that height above itself.
+   --header-total is measured by the Header at runtime.
+   --------------------------------------------------------------- */
+
+section[id],
+[data-anchor] {
+  scroll-margin-top: calc(var(--header-total) + 1rem);
+}
+
 html,
 body {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* No rubber band bounce past the top, bottom or sides of the page */
+  overscroll-behavior: none;
+  overflow-x: clip;
 }
 
 html::-webkit-scrollbar,
@@ -84,5 +152,17 @@ body::-webkit-scrollbar {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Entrance animations, put in place already.
+
+     This has to be CSS. Framer Motion writes the starting state as an inline
+     style during server rendering, useReducedMotion only resolves on the
+     client, and React does not patch a mismatched style attribute while
+     hydrating, so a JavaScript fallback leaves the content at opacity 0
+     permanently. An important declaration beats the inline style. */
+  [data-motion-entrance] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

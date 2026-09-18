@@ -17,7 +17,7 @@ const underlineClasses: Record<NonNullable<SectionEyebrowProps["underlineColor"]
   sky: "bg-primary-sky",
   gold: "bg-primary-gold",
   cream: "bg-primary-cream",
-  navy: "bg-primary-sky",
+  navy: "bg-primary-navy",
 };
 
 /**
@@ -56,16 +56,16 @@ export function SectionEyebrow({
   return (
     <p
       className={`relative mb-9 inline-block w-fit font-sans text-[0.64rem] font-bold uppercase tracking-[0.207em] ${
-        dark ? "text-white" : "text-[#1e1d1c]"
+        dark ? "text-white" : "text-primary-navy"
       } ${className}`}
     >
       {children}
       <span
         ref={underlineRef}
         aria-hidden="true"
-        className={`absolute bottom-[-0.35em] h-[2px] w-full origin-left scale-x-0 transition-transform duration-700 delay-150 ease-in-out ${
+        className={`absolute bottom-[-0.35em] h-[2px] w-full scale-x-0 transition-transform duration-700 delay-150 ease-in-out ${
           underlineClasses[underlineColor]
-        } ${align === "centered" ? "left-1/2 -translate-x-1/2" : "left-0"}`}
+        } ${align === "centered" ? "left-1/2 origin-center -translate-x-1/2" : "left-0 origin-left"}`}
       />
     </p>
   );

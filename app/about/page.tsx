@@ -1,27 +1,36 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/pageMetadata";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { AboutPageHero } from "@/components/sections/about/AboutPageHero";
-import { AboutStorySection } from "@/components/sections/about/AboutStorySection";
-import { AboutValuesSection } from "@/components/sections/about/AboutValuesSection";
-import { AboutCtaSection } from "@/components/sections/about/AboutCtaSection";
+import { PageMain } from "@/components/layout/PageMain";
+import { AboutPeopleHero } from "@/components/sections/about/AboutPeopleHero";
+import { AboutReasonsSection } from "@/components/sections/about/AboutReasonsSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { aboutFaqs } from "@/lib/faqs";
 
-export const metadata: Metadata = {
-  title: "About Us | Blissful Escapes",
+export const metadata: Metadata = pageMetadata({
+  title: "About us",
   description:
-    "Boutique travel planning with a single point of contact. Learn how Blissful Escapes plans holidays built around you, not a brochure.",
-};
+    "Blissful Escapes is Emma Carrigan and Sylvia, planning luxury travel from Ormskirk, Lancashire, seven days a week. ABTA protected and ATOL bonded.",
+  path: "/about/",
+});
 
 export default function AboutPage() {
   return (
     <>
-      <Header />
-      <main className="flex-1">
-        <AboutPageHero />
-        <AboutStorySection />
-        <AboutValuesSection />
-        <AboutCtaSection />
-      </main>
+      <Header solid />
+      <PageMain>
+        <AboutPeopleHero />
+        <AboutReasonsSection />
+        <FaqSection
+          faqs={aboutFaqs}
+          idPrefix="about"
+          title="How we work"
+          intro="Who plans your trip, who stands behind us and what happens when something goes wrong abroad, answered plainly."
+        />
+        <ContactSection idPrefix="about-contact" />
+      </PageMain>
       <Footer />
     </>
   );

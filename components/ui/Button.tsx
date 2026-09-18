@@ -2,6 +2,8 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import {
   buttonBase,
   buttonFocus,
+  buttonLabelHover,
+  buttonSweepTone,
   buttonVariants,
   type ButtonFocusTone,
   type ButtonVariant,
@@ -25,8 +27,9 @@ export function Button({
 }: Readonly<ButtonProps>) {
   const width = fullWidthOnMobile ? "w-full sm:w-auto" : "";
   const classes = `${buttonBase} ${buttonVariants[variant]} ${buttonFocus[focusTone]} ${width} ${className}`;
+  const sweepTone = buttonSweepTone[variant];
 
-  if (variant === "ghost" || variant === "gold") {
+  if (!sweepTone) {
     return (
       <button type="button" className={classes} {...rest}>
         {children}
@@ -36,8 +39,10 @@ export function Button({
 
   return (
     <button type="button" className={classes} {...rest}>
-      <ButtonSweep />
-      <span className="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-white">
+      <ButtonSweep tone={sweepTone} />
+      <span
+        className={`relative z-10 transition-colors duration-300 ease-in-out ${buttonLabelHover[variant]}`}
+      >
         {children}
       </span>
     </button>

@@ -31,8 +31,8 @@ export function NavLink({ href, label, tone = "brown", className = "", onNavigat
       onNavigate?.();
       return;
     }
-    // Only the homepage is reachable right now — every other page link is deadened.
-    event.preventDefault();
+    // Anything else is a real route now, so let the navigation happen.
+    onNavigate?.();
   };
 
   return (

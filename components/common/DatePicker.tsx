@@ -4,6 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { CalendarDay } from "@/components/ui/CalendarDay";
 import { IconButton } from "@/components/ui/IconButton";
+import { dateFlexibilityOptions, flexibilityLabel } from "@/lib/tripFormOptions";
+import {
+  fieldSizeClasses,
+  fieldToneClasses,
+  type FieldSize,
+  type FieldTone,
+} from "@/components/ui/fieldStyles";
 
 export interface DatePickerProps {
   id: string;
@@ -11,7 +18,11 @@ export interface DatePickerProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  tone?: "default" | "onImage" | "onWhite";
+  tone?: FieldTone;
+  fieldSize?: FieldSize;
+  /** How much give there is around the date. Lives here so it is one field, not two. */
+  flexibility?: string;
+  onFlexibilityChange?: (value: string) => void;
 }
 
 const WEEKDAY_LABELS = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
@@ -45,6 +56,9 @@ export function DatePicker({
   onChange,
   placeholder,
   tone = "default",
+  fieldSize = "md",
+  flexibility = "",
+  onFlexibilityChange,
 }: Readonly<DatePickerProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const [viewMonth, setViewMonth] = useState(() => startOfDay(new Date()));
@@ -74,14 +88,37 @@ export function DatePicker({
     };
   }, []);
 
+  /* The field reads back as one phrase, e.g. "12 June 2027, give or take 2 days". */
+  const applySelection = (date: Date | null, flex: string) => {
+    if (!date) {
+      onChange("");
+      return;
+    }
+    const suffix = flex && flex !== "exact" ? `, ${flexibilityLabel(flex).toLowerCase()}` : "";
+    onChange(`${formatDate(date)}${suffix}`);
+  };
+
   const handleSelect = (date: Date) => {
     setSelectedDate(date);
-    onChange(formatDate(date));
+    applySelection(date, flexibility);
     setIsOpen(false);
+  };
+
+  const handleFlexibility = (value: string) => {
+    const next = value === flexibility ? "" : value;
+    onFlexibilityChange?.(next);
+    if (next === "flexible") {
+      setSelectedDate(null);
+      onChange("Fully flexible");
+      setIsOpen(false);
+      return;
+    }
+    applySelection(selectedDate, next);
   };
 
   const handleNotSure = () => {
     setSelectedDate(null);
+    onFlexibilityChange?.("");
     onChange("Not sure yet");
     setIsOpen(false);
   };
@@ -112,18 +149,16 @@ export function DatePicker({
           autoComplete="off"
           placeholder={placeholder}
           value={value}
-          onFocus={() => setIsOpen(true)}
+          /* Click, not focus. The calendar is a full screen overlay, so opening
+             it on focus meant tabbing through the form took the whole page over
+             before the reader had asked for anything. Clicking the field still
+             opens it, because a click focuses too. */
+          onClick={() => setIsOpen(true)}
           onChange={(event) => {
             onChange(event.target.value);
             setSelectedDate(null);
           }}
-          className={`w-full py-3.5 pl-4 pr-11 text-base outline-none transition-shadow duration-200 ${
-            isOnImage
-              ? "bg-primary-sky/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
-              : tone === "onWhite"
-                ? "bg-white text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-                : "bg-primary-cream text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-          }`}
+          className={`w-full pl-4 pr-11 outline-none transition-shadow duration-200 ${fieldSizeClasses[fieldSize]} ${fieldToneClasses[tone]}`}
         />
         <button
           type="button"
@@ -148,6 +183,9 @@ export function DatePicker({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             onClick={() => setIsOpen(false)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Choose a departure date"
             className="fixed inset-0 z-50 flex items-center justify-center bg-primary-sky px-4"
           >
             <motion.div
@@ -216,6 +254,31 @@ export function DatePicker({
                   />
                 ))}
               </div>
+
+              {onFlexibilityChange && (
+                <div className="mt-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-primary-sky">
+                    How flexible are you?
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {dateFlexibilityOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        aria-pressed={flexibility === option.value}
+                        onClick={() => handleFlexibility(option.value)}
+                        className={`cursor-pointer px-2.5 py-1.5 text-xs font-semibold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-navy ${
+                          flexibility === option.value
+                            ? "bg-primary-navy text-white"
+                            : "bg-primary-cream text-primary-navy hover:bg-primary-sky hover:text-white"
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <button
                 type="button"

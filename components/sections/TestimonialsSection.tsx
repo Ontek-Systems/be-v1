@@ -6,29 +6,49 @@ import { Container } from "@/components/layout/Container";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { TestimonialCard } from "@/components/common/TestimonialCard";
-import { testimonials } from "@/lib/testimonials";
+import { testimonials, type Testimonial } from "@/lib/testimonials";
 
 const PIXELS_PER_SECOND = 22;
 const RESUME_DELAY_MS = 300;
 
-export function TestimonialsSection() {
+export interface TestimonialsSectionProps {
+  /** Defaults to every review. The testimonials page passes only those not told as case studies. */
+  items?: Testimonial[];
+  eyebrow?: string;
+  title?: string;
+  className?: string;
+}
+
+export function TestimonialsSection({
+  items = testimonials,
+  eyebrow = "Reviews",
+  title = "29 five star reviews on Google",
+  className = "",
+}: Readonly<TestimonialsSectionProps>) {
   const trackRef = useRef<HTMLDivElement>(null);
   const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const hasInitializedRef = useRef(false);
   const [setWidth, setSetWidth] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  /* Below lg the marquee only ever showed a sliver of two cards at once, so a
+     phone could never read a whole review. Touch sizes get a snapping
+     scroller instead, which is also what a thumb expects. */
+  const [isCompact, setIsCompact] = useState(true);
   const shouldReduceMotion = useReducedMotion();
   const x = useMotionValue(0);
 
   useEffect(() => {
-    setIsMounted(true);
+    const query = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setIsCompact(!query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
   }, []);
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track || isCompact) return;
 
     const measure = () => {
       const width = track.scrollWidth / 2;
@@ -43,10 +63,10 @@ export function TestimonialsSection() {
     const observer = new ResizeObserver(measure);
     observer.observe(track);
     return () => observer.disconnect();
-  }, [x]);
+  }, [x, isCompact]);
 
   useEffect(() => {
-    if (shouldReduceMotion || isDragging || isPaused || setWidth === 0) return;
+    if (isCompact || shouldReduceMotion || isDragging || isPaused || setWidth === 0) return;
 
     let active = true;
     let controls: ReturnType<typeof animate>;
@@ -79,7 +99,7 @@ export function TestimonialsSection() {
       active = false;
       controls?.stop();
     };
-  }, [isDragging, isPaused, shouldReduceMotion, setWidth, x]);
+  }, [isCompact, isDragging, isPaused, shouldReduceMotion, setWidth, x]);
 
   const handleDragEnd = () => {
     clearTimeout(resumeTimeoutRef.current);
@@ -96,53 +116,73 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="section-y overflow-hidden"
+      className={`section-y overflow-hidden ${className}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <Container>
         <div className="mb-8 flex flex-col items-center text-center sm:mb-10">
-          <SectionEyebrow align="centered">Happy customers</SectionEyebrow>
+          <SectionEyebrow align="centered">{eyebrow}</SectionEyebrow>
           <Heading as="h2" size="lg">
-            The trips they came home talking about
+            {title}
           </Heading>
         </div>
       </Container>
 
-      {/* Full-bleed carousel: auto-slides slowly right to left, draggable to browse manually */}
-      <div className="relative overflow-hidden">
-        <motion.div
-          ref={trackRef}
-          drag={isMounted && !shouldReduceMotion ? "x" : false}
-          dragMomentum={false}
-          onDragStart={() => {
-            clearTimeout(resumeTimeoutRef.current);
-            setIsDragging(true);
-          }}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-          className={`flex gap-4 px-4 sm:px-6 lg:px-8 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-          style={{ x, width: "max-content" }}
-        >
-          {[...testimonials, ...testimonials].map((testimonial, index) => (
-            <motion.div
-              key={`${testimonial.id}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % testimonials.length) * 0.07 }}
-            >
+      {isCompact ? (
+        /* Native horizontal scroll, one review snapped to the centre at a time. */
+        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 sm:gap-5 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {items.map((testimonial) => (
+            <div key={testimonial.id} className="snap-center">
               <TestimonialCard
                 name={testimonial.name}
                 destination={testimonial.destination}
                 quote={testimonial.quote}
                 imageSrc={testimonial.imageSrc}
                 imageAlt={testimonial.imageAlt}
+                  imagePosition={testimonial.imagePosition}
               />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      ) : (
+        /* Full-bleed carousel: auto-slides slowly right to left, draggable to browse manually */
+        <div className="relative overflow-hidden">
+          <motion.div
+            ref={trackRef}
+            drag={shouldReduceMotion ? false : "x"}
+            dragMomentum={false}
+            onDragStart={() => {
+              clearTimeout(resumeTimeoutRef.current);
+              setIsDragging(true);
+            }}
+            onDrag={handleDrag}
+            onDragEnd={handleDragEnd}
+            className={`flex gap-5 px-10 ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+            style={{ x, width: "max-content" }}
+          >
+            {[...items, ...items].map((testimonial, index) => (
+              <motion.div
+                key={`${testimonial.id}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (index % items.length) * 0.07 }}
+              >
+                <TestimonialCard
+                  name={testimonial.name}
+                  destination={testimonial.destination}
+                  quote={testimonial.quote}
+                  imageSrc={testimonial.imageSrc}
+                  imageAlt={testimonial.imageAlt}
+                  imagePosition={testimonial.imagePosition}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      )}
+
     </section>
   );
 }

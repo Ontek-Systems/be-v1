@@ -1,28 +1,35 @@
 import type { SelectHTMLAttributes } from "react";
+import {
+  fieldSizeClasses,
+  fieldToneClasses,
+  type FieldSize,
+  type FieldTone,
+} from "@/components/ui/fieldStyles";
 
 export interface SelectOption {
   value: string;
   label: string;
 }
 
-export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   options: SelectOption[];
-  tone?: "default" | "onImage" | "onWhite";
+  tone?: FieldTone;
+  fieldSize?: FieldSize;
 }
 
-export function Select({ options, tone = "default", className = "", ...rest }: Readonly<SelectProps>) {
-  const fieldClasses =
-    tone === "onImage"
-      ? "bg-primary-sky/20 text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
-      : tone === "onWhite"
-        ? "bg-white text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-        : "bg-primary-cream text-primary-navy shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
-  const arrowClasses = tone === "onImage" ? "fill-white" : "fill-primary-navy";
+export function Select({
+  options,
+  tone = "default",
+  fieldSize = "md",
+  className = "",
+  ...rest
+}: Readonly<SelectProps>) {
+  const arrowClasses = tone === "onImage" ? "text-primary-sky" : "text-primary-navy";
 
   return (
     <div className="relative">
       <select
-        className={`w-full appearance-none px-4 py-3.5 text-base outline-none transition-shadow duration-200 ${fieldClasses} ${className}`}
+        className={`w-full cursor-pointer appearance-none pl-4 pr-10 outline-none transition-shadow duration-200 ${fieldSizeClasses[fieldSize]} ${fieldToneClasses[tone]} ${className}`}
         {...rest}
       >
         {options.map((option) => (

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "images": "node scripts/compress-images.mjs"
   },
   "dependencies": {
     "embla-carousel-auto-scroll": "^8.6.0",

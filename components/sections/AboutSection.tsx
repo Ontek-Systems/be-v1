@@ -7,6 +7,8 @@ import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { TrustBadges } from "@/components/ui/TrustBadges";
+import { DURATION, EASE, LEAD_IN, VIEWPORT, stagger } from "@/lib/motion";
+import { basePath } from "@/lib/siteConfig";
 
 interface CredentialItem {
   value: string;
@@ -14,9 +16,9 @@ interface CredentialItem {
 }
 
 const credentials: CredentialItem[] = [
-  { value: "4+", label: "Years in travel" },
-  { value: "600+", label: "Trusted suppliers" },
-  { value: "7 days", label: "A week, always available" },
+  { value: "29", label: "Five star Google reviews" },
+  { value: "600+", label: "Suppliers, tied to none" },
+  { value: "7 days", label: "A week, phone or WhatsApp" },
 ];
 
 export function AboutSection() {
@@ -28,33 +30,33 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={VIEWPORT}
+            transition={{ duration: DURATION.reveal, delay: LEAD_IN, ease: EASE }}
             className="text-center lg:text-left"
           >
-            <SectionEyebrow>About Us</SectionEyebrow>
+            <SectionEyebrow>About us</SectionEyebrow>
             <Heading as="h2" size="lg">
-              We plan the holidays we would want to take ourselves.
+              Personally handled, start to finish
             </Heading>
 
-            <div className="mx-auto mt-[22px] max-w-2xl space-y-5 lg:mx-0 lg:max-w-none">
-              <Text size="base" className="text-primary-navy leading-relaxed">
-                Blissful Escapes is run out of Ormskirk, Lancashire, right between Liverpool and Manchester, by someone who has spent the last four years doing one thing properly: planning proper holidays for people who deserve better than a brochure. No call centre, no script, just straight talking and a lot of graft behind the scenes.
+            <div className="mx-auto mt-[22px] max-w-[34rem] space-y-5 sm:max-w-[38rem] lg:mx-0 lg:max-w-none">
+              <Text size="lg" className="text-primary-navy leading-relaxed">
+                Blissful Escapes is Emma Carrigan and Sylvia, working out of Ormskirk in Lancashire, midway between Liverpool and Manchester. Emma has spent the last four years planning luxury travel, after a career running large retail teams before that, and Sylvia looks after her own clients over towards Wigan. Between the two of us we plan every trip ourselves, and one of us answers when you ring.
               </Text>
-              <Text size="base" className="text-primary-navy leading-relaxed">
-                The speciality is honeymoons, safaris, and the big milestone trips, the ones where the details actually matter. Over 600 trusted suppliers across luxury, adventure, wellbeing and fully inclusive stays mean you get matched to the right hotel, the right route and the right price, not whichever package pays the best commission.
+              <Text size="lg" className="text-primary-navy leading-relaxed">
+                Because we are independent, with over 600 suppliers behind us and no ties to any particular hotel group or airline, we can put you wherever the trip is genuinely best rather than wherever the commission happens to be highest.
               </Text>
-              <Text size="base" className="text-primary-navy leading-relaxed">
-                The best bit of the job is hearing how a trip actually went, not just how it was booked. Tell me what matters to you, and I will sort the rest.
+              <Text size="lg" className="text-primary-navy leading-relaxed">
+                Most of what we plan is honeymoons, safaris, proposals and destination weddings, the sort of trip where the details are worth getting right, though we are just as happy arranging a fortnight in the sun. Tell us what you have in mind and we will take it from there.
               </Text>
             </div>
 
             {/* Credentials row */}
-            <div className="mt-10 flex flex-wrap justify-center gap-8 lg:justify-start">
+            <div className="mt-10 grid grid-cols-1 gap-6 xs:grid-cols-3 xs:gap-4 sm:gap-8 lg:flex lg:flex-wrap lg:justify-start">
               {credentials.map((cred) => (
                 <div key={cred.label}>
-                  <p className="font-display text-3xl font-bold text-primary-navy">{cred.value}</p>
-                  <p className="mt-1 text-sm text-primary-sky">{cred.label}</p>
+                  <p className="font-display text-3xl font-bold text-primary-navy sm:text-4xl lg:text-3xl">{cred.value}</p>
+                  <p className="mx-auto mt-1 max-w-[12rem] text-sm text-primary-sky lg:mx-0">{cred.label}</p>
                 </div>
               ))}
             </div>
@@ -66,9 +68,9 @@ export function AboutSection() {
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="relative mx-auto w-full max-w-sm sm:max-w-md lg:mx-0 lg:max-w-none"
+            viewport={VIEWPORT}
+            transition={{ duration: DURATION.reveal, delay: LEAD_IN + 0.12, ease: EASE }}
+            className="relative mx-auto w-full max-w-xs xs:max-w-sm sm:max-w-md lg:mx-0 lg:max-w-none"
           >
             {/*
               Video-ready slot: swap the inner <Image> for a <video> element
@@ -77,8 +79,8 @@ export function AboutSection() {
             */}
             <div className="relative aspect-[3/4] w-full overflow-hidden sm:aspect-[4/5] lg:aspect-[3/4]">
               <Image
-                src="/be-v1/assets/images/emma.jpg"
-                alt="Emma, founder of Blissful Escapes"
+                src={`${basePath}/assets/images/emma.webp`}
+                alt="Emma Carrigan, who plans every Blissful Escapes trip"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

@@ -1,25 +1,42 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/pageMetadata";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { ContactHero } from "@/components/sections/contact/ContactHero";
+import { PageMain } from "@/components/layout/PageMain";
+import { PageHero } from "@/components/sections/PageHero";
 import { ContactFormSection } from "@/components/sections/contact/ContactFormSection";
-import { ContactFaqSection } from "@/components/sections/contact/ContactFaqSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { contactFaqs } from "@/lib/faqs";
+import { basePath } from "@/lib/siteConfig";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Blissful Escapes",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact us",
   description:
-    "Get in touch with Blissful Escapes personal travel consultancy in Ormskirk, Lancashire. Call 07789 652 136 or send an enquiry for bespoke trip planning with ABTA & ATOL protection.",
-};
+    "Talk to Emma or Sylvia about a trip. Blissful Escapes plans luxury travel from Ormskirk, Lancashire, seven days a week, by phone, email or WhatsApp.",
+  path: "/contact/",
+});
 
 export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="flex-1">
-        <ContactHero />
+      <PageMain>
+        <PageHero
+          eyebrow="Contact us"
+          title="Start planning your trip"
+          intro="Tell us roughly when and roughly where and we will take it from there, because there is nothing to book and nothing to commit to at this stage."
+          imageSrc={`${basePath}/assets/images/destinations/indian-ocean/maldives-jetty.webp`}
+          imageAlt="A long wooden jetty over the lagoon in the Maldives"
+          footnote="ABTA protected. ATOL bonded"
+        />
         <ContactFormSection />
-        <ContactFaqSection />
-      </main>
+        <FaqSection
+          faqs={contactFaqs}
+          idPrefix="contact"
+          title="What people usually ask first"
+          intro="If the answer you want is not here, ring us and ask, because it is a quicker conversation than it is a page."
+        />
+      </PageMain>
       <Footer />
     </>
   );

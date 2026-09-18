@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blissful Escapes
 
-## Getting Started
+Marketing site for Blissful Escapes, a boutique luxury travel
+business in Ormskirk, Lancashire.
 
-First, run the development server:
+Next.js 16 App Router, React 19, Tailwind CSS v4, Framer Motion. The site is
+exported as static files and deployed to GitHub Pages.
+
+## Running it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static export into ./out
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site serves from `/` unless `NEXT_PUBLIC_BASE_PATH` is set. The GitHub Pages
+preview sets it to `/be-v1`; on its own domain it stays empty.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill it in. All three variables are read at
+**build time only**, because the site is a static export and there is no server
+to read them at request time.
 
-## Learn More
+| Variable | What breaks without it |
+|---|---|
+| `NEXT_PUBLIC_API_URL` | The enquiry form falls back to `http://localhost:5000/api/v1`, which does not exist for a visitor. The build prints a warning. |
+| `NEXT_PUBLIC_BASE_PATH` | Nothing on the real domain. The Pages workflow defaults it to `/be-v1`; set the repository variable to `/` once the site has its own domain. |
+| `NEXT_PUBLIC_SITE_URL` | The build treats itself as the GitHub Pages preview: canonical URLs point at the preview and `robots.txt` serves `Disallow: /`, so the preview cannot compete with the live domain. |
 
-To learn more about Next.js, take a look at the following resources:
+For deploys, they are set as GitHub Actions repository variables and read by
+`.github/workflows/deploy-pages.yml`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Where things live
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Path | What is in it |
+|---|---|
+| `app/` | Routes. Pages are thin and only compose sections. |
+| `components/ui/` | Atoms: Button, Input, Heading, icons. |
+| `components/common/` | Molecules: cards, form fields, the lightbox, the date picker. |
+| `components/sections/` | Page sections. |
+| `components/layout/` | Container, PageMain. |
+| `lib/` | Content data, API clients, site config. |
 
-## Deploy on Vercel
+Content lives in `lib/` as typed data, not in the components. Adding a
+destination to `lib/destinationDetails.ts` gives you the page, the nav dropdown
+and the sitemap entry.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Before writing any copy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`COPYWRITING.md` is the source of truth for every user facing word on the site,
+and `CLAUDE.md` holds the architectural and styling rules. Read both first.
+
+## Backend
+
+The API is a separate service. This repo talks to it at:
+
+- `POST /trip-enquiries` — the public enquiry form, and the only call it makes

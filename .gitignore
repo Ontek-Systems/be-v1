@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -41,3 +42,16 @@ yarn-error.log*
 next-env.d.ts
 
 /context
+
+# Client material that is not part of the site. The deploy repo is the source
+# for a public GitHub Pages site, so anything committed here is published:
+# the call recordings are a verbatim client conversation and the review
+# screenshots carry customer names.
+/emma*call*.txt
+/reviews/
+
+# Finder metadata. These list the full contents of the folder they sit in, and
+# anything under public/ is copied verbatim into the deployed site, so a stray
+# one publishes a directory listing at a guessable URL.
+.DS_Store
+**/.DS_Store

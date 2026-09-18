@@ -62,17 +62,17 @@ export function NavDropdown({
       open();
       return;
     }
+    /* A hash target scrolls the homepage in place. A real route falls
+       through to the Link and navigates. */
     if (href.startsWith("#") && isHomepage) {
       event.preventDefault();
       smoothScrollTo(href.slice(1));
-    } else {
-      event.preventDefault();
     }
     setIsOpen(false);
   };
 
   return (
-    <div className="relative" onMouseEnter={open} onMouseLeave={scheduleClose}>
+    <div className="relative flex items-center" onMouseEnter={open} onMouseLeave={scheduleClose}>
       <Link
         href={resolvedHref}
         onClick={handleLabelClick}
@@ -111,10 +111,7 @@ export function NavDropdown({
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={(event) => {
-                  event.preventDefault();
-                  setIsOpen(false);
-                }}
+                onClick={() => setIsOpen(false)}
                 className="group flex items-center gap-3 p-2 transition-colors duration-150 hover:bg-primary-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-navy"
               >
                 {item.imageSrc && (

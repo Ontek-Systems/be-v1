@@ -33,7 +33,8 @@ export function PageScrollbar() {
   }, []);
 
   useEffect(() => {
-    update();
+    /* No priming call: observing documentElement fires the observer once with
+       the current size, which measures the track for us. */
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
 
@@ -83,13 +84,17 @@ export function PageScrollbar() {
       onPointerDown={(event) => {
         if (event.target === trackRef.current) scrollToFraction(event.clientY);
       }}
-      className="fixed right-0 top-0 z-30 hidden h-dvh w-3 cursor-pointer md:block"
+      /* Mouse driven only. On a touch tablet it sat over the content as a
+         stray blue bar that nothing could grab. */
+      aria-hidden="true"
+      className="fixed right-0 top-0 z-30 hidden h-dvh w-3 cursor-pointer [@media(min-width:1024px)_and_(pointer:fine)]:block"
       style={{ height: trackHeight || "100dvh" }}
     >
+      {/* Presentational. It duplicates a scroll the browser already exposes to
+          assistive tech and to the keyboard, and an incomplete `role="scrollbar"`
+          announces a control that cannot be reached or operated. */}
       <div
-        role="scrollbar"
-        aria-orientation="vertical"
-        aria-valuenow={Math.round((thumbTop / Math.max(trackHeight - thumbHeight, 1)) * 100)}
+        aria-hidden="true"
         onPointerDown={(event) => {
           event.stopPropagation();
           isDraggingRef.current = true;

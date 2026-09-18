@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
+import { DURATION, EASE, LEAD_IN, VIEWPORT, stagger } from "@/lib/motion";
+import { basePath } from "@/lib/siteConfig";
 
 interface Associate {
   name: string;
@@ -11,17 +13,17 @@ interface Associate {
 }
 
 const associates: Associate[] = [
-  { name: "Emirates", src: "/be-v1/assets/images/logo-banner/Emirates-Logo.png", widthClass: "w-28 sm:w-32 lg:w-36" },
+  { name: "Emirates", src: `${basePath}/assets/images/logo-banner/Emirates-Logo.webp`, widthClass: "w-28 sm:w-32 lg:w-36" },
   {
     name: "Jumeirah",
-    src: "/be-v1/assets/images/logo-banner/Jumeirah-Logo-Vector.svg-.png",
+    src: `${basePath}/assets/images/logo-banner/Jumeirah-Logo-Vector.svg-.webp`,
     widthClass: "w-32 sm:w-36 lg:w-40",
   },
-  { name: "Qatar Airways", src: "/be-v1/assets/images/logo-banner/Qatar-Airways-Logo.png", widthClass: "w-32 sm:w-36 lg:w-40" },
-  { name: "One&Only Resorts", src: "/be-v1/assets/images/logo-banner/one-and-only-logo.png", widthClass: "w-36 sm:w-40 lg:w-48" },
+  { name: "Qatar Airways", src: `${basePath}/assets/images/logo-banner/Qatar-Airways-Logo.webp`, widthClass: "w-32 sm:w-36 lg:w-40" },
+  { name: "One&Only Resorts", src: `${basePath}/assets/images/logo-banner/one-and-only-logo.webp`, widthClass: "w-36 sm:w-40 lg:w-48" },
   {
     name: "Singapore Airlines",
-    src: "/be-v1/assets/images/logo-banner/Singapore_Airlines_Logo_2.svg.webp",
+    src: `${basePath}/assets/images/logo-banner/Singapore_Airlines_Logo_2.svg.webp`,
     widthClass: "w-32 sm:w-36 lg:w-40",
   },
 ];
@@ -33,8 +35,8 @@ export function AssociatesSection() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          viewport={VIEWPORT}
+          transition={{ duration: DURATION.reveal, delay: LEAD_IN, ease: EASE }}
           className="flex flex-wrap items-center justify-center gap-x-10 gap-y-10 sm:gap-x-14 lg:gap-x-20"
         >
           {associates.map((associate) => (

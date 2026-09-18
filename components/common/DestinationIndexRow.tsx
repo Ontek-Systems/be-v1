@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import { DURATION, EASE, LEAD_IN, VIEWPORT, stagger } from "@/lib/motion";
 
 export interface DestinationIndexRowProps {
   slug: string;
@@ -16,12 +16,14 @@ export interface DestinationIndexRowProps {
   onActivate: () => void;
 }
 
+/**
+ * The desktop only index list. Phones and tablets get DestinationCard instead,
+ * so this no longer carries a second layout inside itself.
+ */
 export function DestinationIndexRow({
   slug,
   name,
   tagline,
-  imageSrc,
-  imageAlt,
   displayIndex,
   isActive,
   onActivate,
@@ -30,70 +32,50 @@ export function DestinationIndexRow({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: displayIndex * 0.06, ease: "easeOut" }}
+      viewport={VIEWPORT}
+      transition={{ duration: DURATION.reveal, delay: LEAD_IN + stagger(displayIndex, 0.06), ease: EASE }}
     >
       <Link
         href={`/destinations/${slug}`}
         aria-label={`Explore ${name}`}
         onMouseEnter={onActivate}
         onFocus={onActivate}
-        className="group block py-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-navy sm:py-7"
+        className="group block py-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-navy"
       >
-        <div className="flex flex-col items-center gap-4 text-center lg:flex-row lg:items-baseline lg:gap-6 lg:text-left">
-          <span className="relative mb-5 inline-block w-fit font-sans text-[0.64rem] font-bold uppercase tabular-nums tracking-[0.207em] text-[#1e1d1c] transition-colors duration-300 lg:mb-0 lg:text-sm lg:font-semibold lg:tracking-normal lg:text-primary-sky">
-            {String(displayIndex + 1).padStart(2, "0")}
-            <span
-              aria-hidden="true"
-              className="absolute bottom-[-0.35em] left-0 h-[2px] w-full bg-primary-gold lg:hidden"
-            />
+        <div className="flex items-baseline gap-6">
+          <span
+            className={`inline-block w-fit font-sans text-sm font-semibold tabular-nums transition-colors duration-300 group-hover:text-primary-gold ${
+              isActive ? "text-primary-gold" : "text-primary-sky"
+            }`}
+          >
+            {`${String(displayIndex + 1).padStart(2, "0")}.`}
           </span>
 
-          <div className="w-full min-w-0 lg:flex-1">
-            <div className="flex items-center justify-center gap-x-6 lg:justify-between">
-              <h3
-                className={`font-display text-3xl font-bold tracking-tight transition-colors duration-300 ease-out sm:text-4xl lg:text-5xl ${
-                  isActive ? "text-primary-navy" : "text-primary-sky/75 group-hover:text-primary-navy"
-                }`}
-              >
-                {name}
-              </h3>
-            </div>
+          <div className="min-w-0 flex-1">
+            <h3
+              className={`font-display text-5xl font-bold tracking-tight transition-colors duration-300 ease-out ${
+                isActive ? "text-primary-navy" : "text-primary-sky/75 group-hover:text-primary-navy"
+              }`}
+            >
+              {name}
+            </h3>
 
-            {/* Phone and tablet: tagline sits under the name */}
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-primary-navy/80 lg:hidden">
-              {tagline}
-            </p>
-
-            {/* Phone and tablet: image sits below the text */}
-            <div className="relative mt-5 aspect-4/3 w-full overflow-hidden shadow-md sm:aspect-16/9 lg:hidden">
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                fill
-                sizes="100vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-navy/80 to-transparent to-55%" />
-              <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[0.64rem] font-bold uppercase tracking-[0.207em] text-primary-gold">
-                Explore Region
-              </span>
-            </div>
-
-            {/* Desktop: tagline reveals cleanly on active */}
+            {/* The tagline reveals cleanly on the active row. */}
             <div
-              className={`hidden grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out lg:grid ${
-                isActive ? "lg:grid-rows-[1fr]" : ""
+              className={`grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out ${
+                isActive ? "grid-rows-[1fr]" : ""
               }`}
             >
               <div className="overflow-hidden">
-                <p className="mt-2.5 max-w-xl text-base text-primary-navy/80 leading-relaxed">{tagline}</p>
+                <p className="mt-2.5 max-w-xl text-base leading-relaxed text-primary-navy/80 transition-colors duration-300 group-hover:text-primary-navy">
+                  {tagline}
+                </p>
               </div>
             </div>
           </div>
 
           <span
-            className={`hidden shrink-0 items-center gap-2 self-center text-sm font-semibold text-primary-navy transition-opacity duration-300 lg:inline-flex ${
+            className={`inline-flex shrink-0 items-center gap-2 self-center text-sm font-semibold text-primary-navy transition-opacity duration-300 ${
               isActive ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -110,7 +92,7 @@ export function DestinationIndexRow({
 
         {/* Divider line */}
         <div
-          className={`mt-6 h-px w-full origin-left transition-colors duration-300 sm:mt-7 ${
+          className={`mt-7 h-px w-full origin-left transition-colors duration-300 ${
             isActive ? "bg-primary-sky" : "bg-primary-sky/40"
           }`}
         />

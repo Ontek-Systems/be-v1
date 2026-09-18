@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { Heading } from "@/components/ui/Heading";
@@ -11,7 +12,10 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { destinationOptions } from "@/lib/destinationOptions";
-import { useTripPlan } from "@/lib/TripPlanContext";
+import { tripLengthOptions } from "@/lib/tripFormOptions";
+import { useTripPlan, type TripPlan } from "@/lib/TripPlanContext";
+import { contactPhoneDisplay, contactPhoneHref } from "@/lib/contactDetails";
+import { submitTripEnquiry, TripEnquiryError } from "@/lib/tripEnquiryApi";
 
 interface FormState {
   name: string;
@@ -20,6 +24,7 @@ interface FormState {
   from: string;
   where: string;
   when: string;
+  flexibility: string;
   duration: string;
   message: string;
 }
@@ -31,9 +36,14 @@ const emptyForm: FormState = {
   from: "",
   where: "",
   when: "",
+  flexibility: "",
   duration: "",
   message: "",
 };
+
+/* Deliberately loose. The job here is to catch a missing @ or a stray space,
+   not to adjudicate what a valid address is. */
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export interface TripEnquiryFormProps {
   /** Namespaces field ids so two instances can coexist on one page. */
@@ -53,34 +63,70 @@ export function TripEnquiryForm({
 }: Readonly<TripEnquiryFormProps>) {
   const { plan, clearPlan } = useTripPlan();
   const [form, setForm] = useState<FormState>(emptyForm);
-  const [showPrompt, setShowPrompt] = useState(false);
+  const [error, setError] = useState("");
+  const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  /* Hidden from people, irresistible to the bots that walk static forms. */
+  const [botField, setBotField] = useState("");
 
-  useEffect(() => {
-    if (!plan) return;
+  /* The hero bar hands its answers over through context. Folding them in during
+     render rather than in an effect means the fields are already filled on the
+     paint the reader arrives at, instead of flashing empty first. */
+  const [appliedPlan, setAppliedPlan] = useState<TripPlan | null>(null);
+  if (plan && plan !== appliedPlan) {
+    setAppliedPlan(plan);
     setForm((prev) => ({
       ...prev,
       from: plan.from || prev.from,
       where: plan.where || prev.where,
       when: plan.when || prev.when,
+      flexibility: plan.flexibility || prev.flexibility,
       duration: plan.duration || prev.duration,
     }));
-    clearPlan();
-  }, [plan, clearPlan]);
+  }
 
+  useEffect(() => {
+    if (appliedPlan) clearPlan();
+  }, [appliedPlan, clearPlan]);
+
+  /* The maxLength on each field is deliberate rather than cosmetic: the form
+     posts straight to a public, unauthenticated endpoint, and an unbounded
+     message field lets a script push an arbitrarily large body at it. The
+     ceilings are far above anything a person would type. */
   const set = (field: keyof FormState) => (value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    /* Name and email are the two an enquiry cannot be answered without. Phone
+       stays optional on purpose. */
     if (!form.name.trim() || !form.email.trim()) {
-      setShowPrompt(true);
+      setError("We need your name and email address so we can come back to you.");
       return;
     }
 
-    setShowPrompt(false);
-    setSubmitted(true);
+    if (!EMAIL_PATTERN.test(form.email.trim())) {
+      setError("That email address does not look right. Could you check it over?");
+      return;
+    }
+
+    if (botField) return;
+
+    setError("");
+    setIsSending(true);
+    try {
+      await submitTripEnquiry(form);
+      setSubmitted(true);
+    } catch (err) {
+      setError(
+        err instanceof TripEnquiryError
+          ? err.message
+          : "We could not send that just then. Please try again in a moment.",
+      );
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const id = (field: string) => `${idPrefix}-${field}`;
@@ -101,12 +147,12 @@ export function TripEnquiryForm({
           </svg>
         </div>
         <Heading as="h2" size="md">
-          Thanks, {form.name.split(" ")[0]}!
+          Thank you, {form.name.split(" ")[0]}
         </Heading>
         <Text size="lg" className="mt-[13px] text-primary-navy">
           {successBody}{" "}
-          <a href="tel:07789652136" className="font-semibold text-primary-navy underline-offset-2 hover:underline">
-            07789 652 136
+          <a href={`tel:+${contactPhoneHref}`} className="font-semibold text-primary-navy underline-offset-2 hover:underline">
+            {contactPhoneDisplay}
           </a>
           .
         </Text>
@@ -115,6 +161,7 @@ export function TripEnquiryForm({
           onClick={() => {
             setSubmitted(false);
             setForm(emptyForm);
+            setError("");
           }}
           className="mt-8 cursor-pointer text-sm font-semibold text-primary-navy underline-offset-2 transition-colors hover:text-primary-sky hover:underline focus-visible:outline-2 focus-visible:outline-primary-navy"
         >
@@ -134,6 +181,7 @@ export function TripEnquiryForm({
         <Input
           id={id("name")}
           name="name"
+          maxLength={200}
           type="text"
           tone={fieldTone}
           autoComplete="name"
@@ -147,6 +195,7 @@ export function TripEnquiryForm({
         <Input
           id={id("email")}
           name="email"
+          maxLength={254}
           type="email"
           tone={fieldTone}
           autoComplete="email"
@@ -156,24 +205,25 @@ export function TripEnquiryForm({
         />
       </FormField>
 
-      <FormField id={id("phone")} label="Phone (optional)">
+      <FormField id={id("phone")} label="Phone number">
         <Input
           id={id("phone")}
           name="phone"
+          maxLength={40}
           type="tel"
           tone={fieldTone}
           autoComplete="tel"
           placeholder="07700 900000"
           value={form.phone}
           onChange={(e) => set("phone")(e.target.value)}
-          style={form.phone ? { boxShadow: "inset 0 -2px 0 0 var(--color-primary-gold)" } : undefined}
         />
       </FormField>
 
-      <FormField id={id("from")} label="Traveling from">
+      <FormField id={id("from")} label="Travelling from">
         <Input
           id={id("from")}
           name="from"
+          maxLength={120}
           type="text"
           tone={fieldTone}
           autoComplete="address-level2"
@@ -199,22 +249,20 @@ export function TripEnquiryForm({
           id={id("when")}
           name="when"
           tone={fieldTone}
-          placeholder="e.g. next spring, or June 2027"
+          placeholder="Pick a date"
           value={form.when}
           onChange={set("when")}
+          flexibility={form.flexibility}
+          onFlexibilityChange={set("flexibility")}
         />
       </FormField>
 
-      <FormField id={id("duration")} label="Trip length (days)">
-        <Input
+      <FormField id={id("duration")} label="Trip length">
+        <Select
           id={id("duration")}
           name="duration"
-          type="number"
           tone={fieldTone}
-          min={1}
-          max={365}
-          inputMode="numeric"
-          placeholder="e.g. 10"
+          options={tripLengthOptions}
           value={form.duration}
           onChange={(e) => set("duration")(e.target.value)}
         />
@@ -225,24 +273,50 @@ export function TripEnquiryForm({
           <Textarea
             id={id("message")}
             name="message"
+            maxLength={4000}
             rows={4}
             tone={textareaTone}
-            placeholder="Tell us a bit about the trip. Who you are travelling with, what matters most, any ideas you already have..."
+            placeholder="Who is travelling, and is it for a special occasion? A wedding, a honeymoon, a proposal, a 50th birthday. Anything that matters to you is worth telling us."
             value={form.message}
             onChange={(e) => set("message")(e.target.value)}
           />
         </FormField>
       </div>
 
+      {/* Never shown and never focusable, so anything that fills it in is not a
+          person. Named to look like the field a scraper expects. */}
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor={id("company")}>Company</label>
+        <input
+          id={id("company")}
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={botField}
+          onChange={(e) => setBotField(e.target.value)}
+        />
+      </div>
+
+      {/* Off screen rather than absent, so a screen reader is already listening
+          on the region when the message arrives. */}
       <div className="flex flex-col items-center justify-center gap-3 pt-2 text-center sm:col-span-2">
-        {showPrompt && (
-          <p aria-live="polite" className="text-sm text-primary-navy">
-            Could you pop in your name and email? We just need those two to get back to you.
-          </p>
-        )}
-        <Button type="submit" className="mx-auto bg-primary-navy!">
-          Send my travel details
+        <p aria-live="polite" role="status" className={`text-sm text-primary-navy ${error ? "" : "sr-only"}`}>
+          {error}
+        </p>
+        <Button type="submit" disabled={isSending} className="mx-auto disabled:cursor-not-allowed disabled:opacity-60">
+          {isSending ? "Sending..." : "Send my travel details"}
         </Button>
+        <p className="max-w-md text-xs leading-relaxed text-primary-navy/70">
+          We only use your details to plan your trip. Read how in our{" "}
+          <Link
+            href="/privacy"
+            className="cursor-pointer underline underline-offset-2 transition-colors duration-150 hover:text-primary-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-navy"
+          >
+            privacy policy
+          </Link>
+          .
+        </p>
       </div>
     </form>
   );

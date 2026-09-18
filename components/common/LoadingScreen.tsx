@@ -1,8 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { basePath } from "@/lib/siteConfig";
 
 /**
  * Full screen navy loader. The three logo SVGs all share the same
@@ -12,8 +12,8 @@ import { useEffect, useState } from "react";
  */
 
 const LOGO_LAYERS = [
-  { src: "/be-v1/assets/images/logo-svg/title-logo-svg.svg", alt: "Blissful Escapes" },
-  { src: "/be-v1/assets/images/logo-svg/subtitle-logo-svg.svg", alt: "" },
+  { src: `${basePath}/assets/images/logo-svg/title-logo-svg.svg`, alt: "Blissful Escapes" },
+  { src: `${basePath}/assets/images/logo-svg/subtitle-logo-svg.svg`, alt: "" },
 ] as const;
 
 interface LoadingScreenProps {
@@ -21,16 +21,17 @@ interface LoadingScreenProps {
   duration?: number;
 }
 
+/* Lives in the root layout, which persists across client side navigation, so
+   it plays once per full page load (first visit, reload, or a URL typed in)
+   and never on in app link clicks between pages. */
 export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
-  const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    setVisible(true);
     const timer = window.setTimeout(() => setVisible(false), reduceMotion ? 600 : duration);
     return () => window.clearTimeout(timer);
-  }, [pathname, duration, reduceMotion]);
+  }, [duration, reduceMotion]);
 
   return (
     <AnimatePresence>
@@ -64,7 +65,7 @@ export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
               {/* Left rule slides in from the left, right rule from the right, so
                   neither ever sweeps across the wordmark. */}
               <motion.img
-                src="/be-v1/assets/images/logo-svg/lines-logo-svg.svg"
+                src={`${basePath}/assets/images/logo-svg/lines-logo-svg.svg`}
                 alt=""
                 aria-hidden
                 className="absolute inset-0 h-full w-full"
@@ -78,7 +79,7 @@ export function LoadingScreen({ duration = 2100 }: LoadingScreenProps) {
                 }}
               />
               <motion.img
-                src="/be-v1/assets/images/logo-svg/lines-logo-svg.svg"
+                src={`${basePath}/assets/images/logo-svg/lines-logo-svg.svg`}
                 alt=""
                 aria-hidden
                 className="absolute inset-0 h-full w-full"

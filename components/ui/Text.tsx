@@ -9,8 +9,8 @@ export interface TextProps {
 
 const sizeClasses: Record<NonNullable<TextProps["size"]>, string> = {
   sm: "text-sm leading-relaxed",
-  base: "text-base sm:text-lg leading-relaxed",
-  lg: "text-lg sm:text-xl leading-relaxed",
+  base: "text-base lg:text-lg leading-relaxed",
+  lg: "text-[0.9375rem] sm:text-base lg:text-lg leading-relaxed",
 };
 
 export function Text({ as = "p", size = "base", className = "", children }: Readonly<TextProps>) {

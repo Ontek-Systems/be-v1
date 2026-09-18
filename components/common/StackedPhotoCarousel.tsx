@@ -139,14 +139,14 @@ export function StackedPhotoCarousel({ photos, tone = "dark" }: Readonly<Stacked
                   className="object-cover"
                   priority={i === 0}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-sky/60 via-transparent to-transparent opacity-80" />
+                <div className="card-scrim" />
 
                 {isTop && photo.title && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15, duration: 0.3 }}
-                    className="absolute bottom-0 left-0 right-0 p-4 text-white"
+                    className="hero-text-shadow absolute bottom-0 left-0 right-0 p-4 text-white"
                   >
                     <p className="text-xs uppercase tracking-widest text-primary-gold font-semibold">
                       Photo {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}

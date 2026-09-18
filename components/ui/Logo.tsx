@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { basePath } from "@/lib/siteConfig";
 
 export interface LogoProps {
   tone?: "brown" | "cream";
@@ -11,12 +12,12 @@ export function Logo({ tone = "brown", className = "" }: Readonly<LogoProps>) {
     return (
       <Link href="/" className={`group inline-block ${className}`}>
         <Image
-          src="/be-v1/assets/images/logo.png"
+          src={`${basePath}/assets/images/logo.webp`}
           alt="Blissful Escapes, Personally Planned Travel"
           width={500}
           height={150}
           priority
-          className="h-[73px] w-auto sm:h-[87px]"
+          className="h-12 w-auto xs:h-[54px] sm:h-[66px] lg:h-[74px]"
         />
       </Link>
     );

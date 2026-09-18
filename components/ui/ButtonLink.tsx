@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import {
   buttonBase,
   buttonFocus,
+  buttonLabelHover,
+  buttonSweepTone,
   buttonVariants,
   type ButtonFocusTone,
   type ButtonVariant,
@@ -28,14 +30,17 @@ export function ButtonLink({
   className = "",
 }: Readonly<ButtonLinkProps>) {
   const width = fullWidthOnMobile ? "w-full sm:w-auto" : "";
+  const sweepTone = buttonSweepTone[variant];
 
   return (
     <Link
       href={href}
       className={`${buttonBase} ${buttonVariants[variant]} ${buttonFocus[focusTone]} ${width} ${className}`}
     >
-      {variant === "primary" && <ButtonSweep />}
-      <span className="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-white">
+      {sweepTone && <ButtonSweep tone={sweepTone} />}
+      <span
+        className={`relative z-10 transition-colors duration-300 ease-in-out ${buttonLabelHover[variant]}`}
+      >
         {children}
       </span>
     </Link>

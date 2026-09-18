@@ -1,106 +1,190 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { NavLink } from "@/components/ui/NavLink";
+import Link from "next/link";
 import { IconButton } from "@/components/ui/IconButton";
 import { Logo } from "@/components/ui/Logo";
+import { MobileMenuSection } from "@/components/common/MobileMenuSection";
 import { navLinks } from "@/lib/navLinks";
 import { destinationDetails } from "@/lib/destinationDetails";
 import { holidayTypeDetails } from "@/lib/holidayTypeDetails";
+import { TopContactBar } from "@/components/sections/TopContactBar";
+
+const menuLinks = navLinks.map((link) => (link.href === "/contact" ? { ...link, label: "Plan your trip" } : link));
+
+const holidayTypeItems = holidayTypeDetails.map((holidayType) => ({
+  key: holidayType.slug,
+  label: holidayType.name,
+  href: `/holidays/${holidayType.slug}`,
+}));
+
+const destinationItems = destinationDetails.map((destination) => ({
+  key: destination.slug,
+  label: destination.name,
+  href: `/destinations/${destination.slug}`,
+}));
 
 export interface MobileMenuPanelProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+/**
+ * Everything a thumb needs on one screen. The two long child lists collapse
+ * behind their parent, so Gallery, Testimonials and Contact stay above the
+ * fold instead of sitting twenty items down.
+ */
 export function MobileMenuPanel({ isOpen, onClose }: Readonly<MobileMenuPanelProps>) {
   const shouldReduceMotion = useReducedMotion();
+  const [openSection, setOpenSection] = useState<string | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+
+  const toggle = (href: string) => setOpenSection((current) => (current === href ? null : href));
+
+  /*
+    The panel declares aria-modal, which promises three things it was not
+    delivering: Escape closes it, Tab stays inside it, and focus goes back to
+    the button that opened it. Without the trap a keyboard reader tabs straight
+    off the end of the menu and onto the page behind it, which is still there
+    and still fully focusable.
+  */
+  useEffect(() => {
+    if (!isOpen) return;
+
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    const focusTimer = window.setTimeout(() => {
+      panelRef.current?.querySelector<HTMLElement>('button[aria-label="Close menu"]')?.focus();
+    }, 50);
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = panelRef.current?.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable || focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.removeEventListener("keydown", handleKeyDown);
+      returnFocusRef.current?.focus();
+    };
+  }, [isOpen, onClose]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={() => setOpenSection(null)}>
       {isOpen && (
         <motion.div
-          initial={{ x: shouldReduceMotion ? 0 : "100%", opacity: shouldReduceMotion ? 0 : 1 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: shouldReduceMotion ? 0 : "100%", opacity: shouldReduceMotion ? 0 : 1 }}
-          transition={{ duration: shouldReduceMotion ? 0.15 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 flex h-dvh w-full flex-col bg-primary-sky px-6 py-5 sm:px-10 sm:py-6 md:hidden"
+          key="backdrop"
+          aria-hidden="true"
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 bg-primary-navy/40 lg:hidden"
+        />
+      )}
+      {isOpen && (
+        <motion.div
+          key="panel"
+          initial={shouldReduceMotion ? { opacity: 0 } : { y: "-100%" }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { y: 0 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { y: "-100%" }}
+          transition={{ duration: shouldReduceMotion ? 0.15 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+          ref={panelRef}
+          id="mobile-menu"
+          className="fixed inset-x-0 top-0 z-50 flex max-h-dvh w-full flex-col overflow-y-auto overscroll-contain bg-primary-sky shadow-lg lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <div className="flex items-center justify-between">
+          <div className="shrink-0">
+            <TopContactBar />
+          </div>
+          <div className="flex shrink-0 items-center justify-between px-5 py-3 sm:px-8">
             <Logo tone="cream" />
             <IconButton
               label="Close menu"
               tone="light"
               onClick={onClose}
-              className="bg-transparent! text-white! hover:text-primary-gold!"
+              className="h-12! w-12! -mr-2 bg-transparent! text-white! hover:text-primary-gold!"
             >
-              <svg viewBox="0 0 20 20" aria-hidden="true" className="h-5 w-5 fill-none stroke-current">
-                <path d="M4 4L16 16M16 4L4 16" strokeWidth="1.5" strokeLinecap="round" />
+              <svg viewBox="0 0 20 20" aria-hidden="true" className="h-6 w-6 fill-none stroke-current">
+                <path d="M4 4L16 16M16 4L4 16" strokeWidth="1.5" strokeLinecap="square" />
               </svg>
             </IconButton>
           </div>
 
-          <nav className="mt-8 flex-1 overflow-y-auto sm:mt-12">
-            {/* min-h-full + justify-center keeps short menus centred while letting tall menus scroll from the top */}
-            <div className="flex min-h-full flex-col items-center justify-center gap-6 py-4 text-center xs:gap-7">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: shouldReduceMotion ? 0 : 0.08 + index * 0.05, duration: 0.3 }}
-              >
-                <NavLink href={link.href} label={link.label} tone="cream" className="text-2xl text-primary-gold! hover:text-white!" onNavigate={onClose} />
+          <span aria-hidden="true" className="mx-5 h-px shrink-0 bg-white/30 sm:mx-8" />
 
-                {link.href === "#holiday-types" && (
-                  <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
-                    {holidayTypeDetails.map((holidayType) => (
-                      <li key={holidayType.slug}>
-                        <Link
-                          href={`/holidays/${holidayType.slug}`}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            onClose();
-                          }}
-                          className="text-sm text-white/85 transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          <nav className="shrink-0 px-5 sm:px-8">
+            <motion.ol
+              className="flex flex-col items-center py-4 sm:py-6"
+              initial="hidden"
+              animate="shown"
+              variants={{ shown: { transition: { staggerChildren: shouldReduceMotion ? 0 : 0.045, delayChildren: 0.08 } } }}
+            >
+              {menuLinks.map((link) => {
+                const children =
+                  link.href === "/holidays" ? holidayTypeItems : link.href === "/destinations" ? destinationItems : null;
+                return (
+                  <motion.li
+                    key={link.href}
+                    variants={{
+                      hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 12 },
+                      shown: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+                    }}
+                  >
+                    {children ? (
+                      <MobileMenuSection
+                        href={link.href}
+                        label={link.label}
+                        items={children}
+                        columns={link.href === "/holidays" ? 2 : 1}
+                        isOpen={openSection === link.href}
+                        onToggle={() => toggle(link.href)}
+                        onNavigate={onClose}
+                      />
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={onClose}
+                        className="group flex min-h-14 items-center justify-center gap-3 py-1 text-white transition-colors duration-200 hover:text-primary-gold focus-visible:outline-none focus-visible:text-primary-gold sm:min-h-16"
+                      >
+                        <span
+                          className={`font-display text-2xl font-bold leading-none sm:text-3xl ${
+                            link.href === "/contact" ? "underline decoration-primary-gold decoration-2 underline-offset-8" : ""
+                          }`}
                         >
-                          {holidayType.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {link.href === "#destinations" && (
-                  <ul className="mt-4 flex flex-col gap-3">
-                    {destinationDetails.map((destination) => (
-                      <li key={destination.slug}>
-                        <Link
-                          href={`/destinations/${destination.slug}`}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            onClose();
-                          }}
-                          className="text-sm text-white/85 transition-colors duration-150 hover:text-primary-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                        >
-                          {destination.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </motion.div>
-            ))}
-            </div>
+                          {link.label}
+                        </span>
+                      </Link>
+                    )}
+                  </motion.li>
+                );
+              })}
+            </motion.ol>
           </nav>
 
-          <p className="mt-4 text-center text-sm text-white/85">
-            Prefer to talk it through? Call us on 07789 652 136.
-          </p>
         </motion.div>
       )}
     </AnimatePresence>

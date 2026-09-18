@@ -1,16 +1,16 @@
+import { destinationDetails } from "@/lib/destinationDetails";
+
 export interface DestinationOption {
   value: string;
   label: string;
 }
 
-/** Single source of truth for the "Destination" select. */
+/** Single source of truth for the "Destination" select, derived from the regions. */
 export const destinationOptions: DestinationOption[] = [
   { value: "", label: "Select a region" },
-  { value: "southeast-asia", label: "Southeast Asia" },
-  { value: "caribbean", label: "Caribbean" },
-  { value: "dubai-middle-east", label: "Dubai & the Middle East" },
-  { value: "europe", label: "Europe" },
-  { value: "americas", label: "The Americas" },
-  { value: "indian-ocean", label: "Indian Ocean" },
+  ...destinationDetails.map((destination) => ({
+    value: destination.slug,
+    label: destination.name,
+  })),
   { value: "not-sure", label: "Not sure yet" },
 ];

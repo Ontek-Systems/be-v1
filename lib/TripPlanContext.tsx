@@ -1,11 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
 export interface TripPlan {
   from: string;
   where: string;
   when: string;
+  /** How much give there is around `when`. */
+  flexibility: string;
   duration: string;
 }
 
@@ -20,17 +22,16 @@ const TripPlanContext = createContext<TripPlanContextValue | null>(null);
 export function TripPlanProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [plan, setPlan] = useState<TripPlan | null>(null);
 
-  return (
-    <TripPlanContext.Provider
-      value={{
-        plan,
-        submitPlan: setPlan,
-        clearPlan: () => setPlan(null),
-      }}
-    >
-      {children}
-    </TripPlanContext.Provider>
+  const clearPlan = useCallback(() => setPlan(null), []);
+
+  /* Memoised: this provider wraps every page, and a fresh object here rerenders
+     the whole tree on any parent render. */
+  const value = useMemo(
+    () => ({ plan, submitPlan: setPlan, clearPlan }),
+    [plan, clearPlan],
   );
+
+  return <TripPlanContext.Provider value={value}>{children}</TripPlanContext.Provider>;
 }
 
 export function useTripPlan() {

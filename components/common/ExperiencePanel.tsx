@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { ParallaxImage } from "@/components/common/ParallaxImage";
+import { DURATION, EASE, LEAD_IN, VIEWPORT, stagger } from "@/lib/motion";
 
 export interface ExperiencePanelProps {
   index: number;
@@ -29,24 +30,25 @@ export function ExperiencePanel({
   */
   const gradient =
     align === "right"
-      ? "bg-gradient-to-t from-primary-sky via-primary-sky/70 to-transparent sm:bg-gradient-to-l sm:from-primary-sky sm:via-primary-sky/60 sm:to-transparent"
-      : "bg-gradient-to-t from-primary-sky via-primary-sky/70 to-transparent sm:bg-gradient-to-r sm:from-primary-sky sm:via-primary-sky/60 sm:to-transparent";
+      ? "bg-gradient-to-t from-black/90 via-black/50 via-45% to-transparent"
+      : "bg-gradient-to-t from-black/90 via-black/50 via-45% to-transparent";
 
   return (
-    <section className="relative flex h-dvh min-h-150 items-end overflow-hidden sm:items-center">
+    <section className="relative flex h-dvh min-h-150 items-end overflow-hidden">
       <ParallaxImage src={imageSrc} alt={imageAlt} strength={16} />
       <div className={`absolute inset-0 ${gradient}`} />
 
-      <Container className="relative pb-14 sm:pb-0">
+      <Container className="relative pb-14 sm:pb-20 lg:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }}
+          viewport={VIEWPORT}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className={`flex max-w-xl flex-col ${alignSelf}`}
+          className={`hero-text-shadow flex max-w-xl flex-col ${alignSelf}`}
         >
           <span className="text-5xl font-display font-bold leading-none text-primary-gold xs:text-6xl sm:text-7xl lg:text-8xl">
             {String(index).padStart(2, "0")}
+            <span className="text-white">.</span>
           </span>
           <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-white xs:text-3xl sm:mt-6 sm:text-4xl lg:text-5xl">
             {title}

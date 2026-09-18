@@ -8,7 +8,9 @@ import { Container } from "@/components/layout/Container";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
+import { LearnMoreCue } from "@/components/ui/LearnMoreCue";
 import { DestinationIndexRow } from "@/components/common/DestinationIndexRow";
+import { DestinationCard } from "@/components/common/DestinationCard";
 import { destinationDetails } from "@/lib/destinationDetails";
 
 export function DestinationsSection() {
@@ -18,24 +20,43 @@ export function DestinationsSection() {
   return (
     <section id="destinations" className="section-y">
       <Container>
-        <div className="mb-12 text-center sm:mb-16 lg:text-left">
-          <SectionEyebrow>Where in the world?</SectionEyebrow>
+        <div className="mb-10 text-center sm:mb-14 lg:mb-16 lg:text-left">
+          <SectionEyebrow>Destinations</SectionEyebrow>
           <Heading as="h2" size="lg">
-            Four regions, known inside out
+            The places we get asked for most
           </Heading>
           <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-navy lg:mx-0">
-            We plan across a handful of places we know really well, rather than offering everywhere and knowing nowhere properly. Hover a region to get a feel for it, then click through to see how we would shape the trip.
+            These are the regions we are asked for most often, and we have travelled all of them, so we can tell you which coast to stay on and which month to avoid. If the trip you want is somewhere else entirely, just ask. We book the whole world.
           </Text>
         </div>
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1fr] lg:gap-16">
+        {/* Phone and tablet: compact cards. Below lg the desktop index list
+            became five full screens of stacked text and full bleed imagery. */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:hidden">
+          {destinationDetails.map((destination, index) => (
+            <DestinationCard
+              key={destination.slug}
+              slug={destination.slug}
+              name={destination.name}
+              region={destination.region}
+              tagline={destination.tagline}
+              imageSrc={destination.heroImage}
+              imageAlt={destination.heroImageAlt}
+              displayIndex={index}
+            />
+          ))}
+        </div>
+
+        <div className="hidden gap-10 lg:grid lg:grid-cols-[0.85fr_1fr] lg:gap-16">
           {/* Sticky synced preview, desktop only */}
-          <div className="hidden lg:block">
-            <div className="sticky top-28">
+          <div className="block">
+            {/* Pinned so the card sits in the middle of the space left under the
+                fixed header stack, rather than sliding up behind it. */}
+            <div className="sticky top-[var(--header-total)] flex h-[calc(100dvh-var(--header-total))] flex-col justify-center">
               <Link
                 href={`/destinations/${active.slug}`}
-                aria-label={`Explore ${active.name}`}
-                className="group relative block aspect-4/5 overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-navy shadow-md"
+                aria-label={`Learn more about ${active.name}`}
+                className="group relative block aspect-[16/15] overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-navy shadow-md"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -56,18 +77,16 @@ export function DestinationsSection() {
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent to-33%" />
+                <div className="card-scrim" />
 
-                <div className="absolute bottom-0 left-0 right-0 p-8">
+                <div className="hero-text-shadow absolute bottom-0 left-0 right-0 p-8">
                   <motion.div
                     key={active.slug}
                     initial={{ opacity: 0, y: 14 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.1, ease: "easeOut" }}
                   >
-                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-gold">
-                      Explore Region
-                    </p>
+                    <LearnMoreCue />
                     <p className="mt-2 text-3xl font-display font-bold tracking-tight text-white sm:text-4xl">
                       {active.name}
                     </p>

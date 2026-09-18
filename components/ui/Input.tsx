@@ -1,20 +1,25 @@
 import type { InputHTMLAttributes } from "react";
+import {
+  fieldSizeClasses,
+  fieldToneClasses,
+  type FieldSize,
+  type FieldTone,
+} from "@/components/ui/fieldStyles";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  tone?: "default" | "onImage" | "onWhite";
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  tone?: FieldTone;
+  fieldSize?: FieldSize;
 }
 
-export function Input({ tone = "default", className = "", ...rest }: Readonly<InputProps>) {
-  const toneClasses =
-    tone === "onImage"
-      ? "bg-primary-sky/20 text-white placeholder:text-white shadow-[inset_0_-2px_0_0_var(--color-primary-sky)] focus:shadow-[inset_0_-2px_0_0_var(--color-white)]"
-      : tone === "onWhite"
-        ? "bg-white text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]"
-        : "bg-primary-cream text-primary-navy placeholder:text-primary-navy/50 shadow-[inset_0_-2px_0_0_var(--color-primary-navy)] focus:shadow-[inset_0_-2px_0_0_var(--color-primary-navy)]";
-
+export function Input({
+  tone = "default",
+  fieldSize = "md",
+  className = "",
+  ...rest
+}: Readonly<InputProps>) {
   return (
     <input
-      className={`w-full px-4 py-3.5 text-base outline-none transition-shadow duration-200 ${toneClasses} ${className}`}
+      className={`w-full px-4 outline-none transition-shadow duration-200 ${fieldSizeClasses[fieldSize]} ${fieldToneClasses[tone]} ${className}`}
       {...rest}
     />
   );

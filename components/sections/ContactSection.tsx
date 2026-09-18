@@ -6,20 +6,30 @@ import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { TripEnquiryForm } from "@/components/common/TripEnquiryForm";
+import { EmailIcon } from "@/components/ui/EmailIcon";
+import { PhoneIcon } from "@/components/ui/PhoneIcon";
+import { contactEmail, contactPhoneDisplay, contactPhoneHref } from "@/lib/contactDetails";
+import { DURATION, EASE, LEAD_IN, VIEWPORT, stagger } from "@/lib/motion";
 
 const contactMethods = [
   {
-    href: "mailto:emma@blissfulescapes.co.uk",
-    label: "emma@blissfulescapes.co.uk",
-    icon: (
-      <svg viewBox="0 0 20 16" aria-hidden="true" className="h-4 w-5 fill-none stroke-current">
-        <path d="M1 1H19V15H1V1Z M1 1L10 9L19 1" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    href: `tel:+${contactPhoneHref}`,
+    label: contactPhoneDisplay,
+    icon: <PhoneIcon className="h-4 w-4" />,
+  },
+  {
+    href: `mailto:${contactEmail}`,
+    label: contactEmail,
+    icon: <EmailIcon className="h-4 w-5" />,
   },
 ];
 
-export function ContactSection() {
+export interface ContactSectionProps {
+  /** Prefix for the form field ids, unique per page. */
+  idPrefix?: string;
+}
+
+export function ContactSection({ idPrefix = "home-contact" }: Readonly<ContactSectionProps>) {
   return (
     <section id="contact" className="section-y bg-primary-navy">
       <Container>
@@ -27,41 +37,41 @@ export function ContactSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
+            viewport={VIEWPORT}
+            transition={{ duration: DURATION.reveal, delay: LEAD_IN, ease: EASE }}
             className="text-center"
           >
             <SectionEyebrow underlineColor="gold" dark align="centered">
               Ready when you are
             </SectionEyebrow>
             <Heading as="h2" size="lg" className="text-white">
-              Let us start planning your trip
+              Start planning your trip
             </Heading>
             <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-cream">
-              Tell us a little about what you have in mind. There is no commitment here, just a conversation about where you want to go and what matters most to you. We will come back with ideas within 48 hours.
+              There is nothing to book and nothing to commit to at this stage, so just tell us roughly what you have in mind and we will come back to you within two working days with some initial ideas.
             </Text>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1, ease: "easeOut" }}
+            viewport={VIEWPORT}
+            transition={{ duration: DURATION.reveal, delay: LEAD_IN + 0.12, ease: EASE }}
             className="relative mt-10 bg-white p-8 shadow-2xl sm:p-12"
           >
             <span className="absolute inset-x-0 top-0 h-1 bg-primary-gold" aria-hidden="true" />
             <TripEnquiryForm
-              idPrefix="home-contact"
+              idPrefix={idPrefix}
               tone="onWhite"
-              successBody="We have got your message and will be in touch within a day or two. In the meantime, if anything changes or you would rather just call, you can reach us on"
+              successBody="We have got your message and will come back to you within two working days. If anything changes, or you would rather just talk it through, you can reach us on"
             />
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={VIEWPORT}
+            transition={{ duration: DURATION.reveal, delay: LEAD_IN + 0.24, ease: EASE }}
             className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-10"
           >
             {contactMethods.map((method) => (

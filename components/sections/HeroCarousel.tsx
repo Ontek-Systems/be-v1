@@ -2,22 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { CrossfadeBackground } from "@/components/common/CrossfadeBackground";
+import { HeroScrim } from "@/components/ui/HeroScrim";
+import { basePath } from "@/lib/siteConfig";
 
 const AUTO_ADVANCE_MS = 4000;
 
 const slides = [
-  { src: "/be-v1/assets/images/hero/barbados-palm-tree-boat.jpg" },
-  { src: "/be-v1/assets/images/hero/capri-clifftop-terrace.jpg" },
-  { src: "/be-v1/assets/images/hero/croatia-coastal-village.jpg" },
-  { src: "/be-v1/assets/images/hero/dubai-palm-jumeirah-aerial.jpg" },
-  { src: "/be-v1/assets/images/hero/elephants-crossing-river.jpeg" },
-  { src: "/be-v1/assets/images/hero/grenada-harbor-town.jpg" },
-  { src: "/be-v1/assets/images/hero/havana-pink-classic-car.jpg" },
-  { src: "/be-v1/assets/images/hero/jamaica-colorful-hillside.jpg" },
-  { src: "/be-v1/assets/images/hero/las-vegas-strip-night.jpeg" },
-  { src: "/be-v1/assets/images/hero/maldives-atoll-aerial.jpeg" },
-  { src: "/be-v1/assets/images/hero/malta-valletta-harbor.jpg" },
-  { src: "/be-v1/assets/images/hero/new-orleans-bourbon-street.jpeg" },
+  { src: `${basePath}/assets/images/hero/santorini-caldera-terrace.webp` },
+  { src: `${basePath}/assets/images/hero/capri-clifftop-terrace.webp` },
+  { src: `${basePath}/assets/images/hero/manarola-cinque-terre.webp` },
+  { src: `${basePath}/assets/images/hero/portofino-harbour-front.webp` },
+  { src: `${basePath}/assets/images/hero/maldives-atoll-aerial.webp` },
+  { src: `${basePath}/assets/images/destinations/europe/positano-amalfi-coast.webp` },
+  { src: `${basePath}/assets/images/hero/dubrovnik-old-town-aerial.webp` },
+  { src: `${basePath}/assets/images/hero/grenada-harbor-town.webp` },
+  { src: `${basePath}/assets/images/hero/venice-rialto-grand-canal.webp` },
+  { src: `${basePath}/assets/images/destinations/oceania/queenstown-lake-wakatipu.webp` },
+  { src: `${basePath}/assets/images/hero/valletta-skyline.webp` },
 ];
 
 export function HeroCarousel() {
@@ -33,7 +34,7 @@ export function HeroCarousel() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       <CrossfadeBackground src={slides[activeIndex].src} priority />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 via-50% to-transparent" />
+      <HeroScrim />
     </div>
   );
 }

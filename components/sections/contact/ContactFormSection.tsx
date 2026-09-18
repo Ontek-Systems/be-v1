@@ -1,90 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
+import { Reveal } from "@/components/common/Reveal";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
-import { TrustBadges } from "@/components/ui/TrustBadges";
 import { TripEnquiryForm } from "@/components/common/TripEnquiryForm";
-
-const reasons = [
-  {
-    title: "Personal Consultancy",
-    body: "Single point of contact from initial plan through to returning home.",
-  },
-  {
-    title: "600+ Trusted Suppliers",
-    body: "Access to exclusive rates across luxury resorts, safaris, and boutique hotels.",
-  },
-  {
-    title: "Zero Planning Fees",
-    body: "All advice, quote iterations, and bespoke planning are completely free.",
-  },
-];
+import { ContactMethodPanel } from "@/components/common/ContactMethodPanel";
 
 export function ContactFormSection() {
   return (
-    <section id="contact-form" className="section-y-lg bg-primary-navy">
+    <section id="contact-form" className="relative overflow-hidden bg-primary-cream section-y">
       <Container>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
-            className="text-center lg:text-left"
-          >
-            <SectionEyebrow dark>Start Planning Your Escape</SectionEyebrow>
-            <Heading as="h2" size="lg" className="text-white">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.6fr_1fr] lg:items-start lg:gap-16">
+          <Reveal className="text-center lg:text-left">
+            <SectionEyebrow>Enquiries</SectionEyebrow>
+            <Heading as="h2" size="lg">
               Tell us what you have in mind
             </Heading>
-            <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-cream lg:mx-0 lg:max-w-none">
-              No commitment, just a conversation about where you want to go and what matters most. Fill in as much or as little as you like, and we will get back to you with ideas.
+            <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-navy lg:mx-0">
+              Fill in as much or as little as you like, because a rough idea of when and roughly
+              where is enough to start with, and we will come back to you within two working days
+              with some initial thoughts.
             </Text>
 
-            <TripEnquiryForm
-              idPrefix="contact-page"
-              className="mt-10 text-left"
-              successBody="We have received your travel details and will be in touch within 24 to 48 hours. In the meantime, if anything changes or you would like to speak sooner, feel free to call us on"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.15, ease: "easeOut" }}
-            className="flex flex-col gap-8 self-start bg-primary-cream p-8 sm:p-10"
-          >
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-navy">
-                Why Book With Us
-              </p>
-              <ul className="mt-5 space-y-4">
-                {reasons.map((reason) => (
-                  <li
-                    key={reason.title}
-                    className="flex items-start gap-3 text-sm leading-relaxed text-primary-navy"
-                  >
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-primary-gold" aria-hidden="true" />
-                    <span>
-                      <strong>{reason.title}:</strong> {reason.body}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+            {/* White card on the cream ground, matching the homepage contact
+                block, with the gold rule sitting on the top edge. */}
+            <div className="relative mt-10 bg-white p-7 text-left shadow-xl sm:p-10">
+              <span className="absolute inset-x-0 top-0 h-1 bg-primary-gold" aria-hidden="true" />
+              <TripEnquiryForm
+                idPrefix="contact-page"
+                tone="onWhite"
+                successBody="We have got your message and will come back to you within two working days. If anything changes, or you would rather just talk it through, you can reach us on"
+              />
             </div>
+          </Reveal>
 
-            <div className="h-px w-full bg-primary-navy/20" />
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary-navy">
-                Trust &amp; Credentials
-              </p>
-              <TrustBadges tone="white" className="mt-4" />
-            </div>
-          </motion.div>
+          <ContactMethodPanel />
         </div>
       </Container>
     </section>

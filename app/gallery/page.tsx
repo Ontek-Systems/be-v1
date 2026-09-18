@@ -1,35 +1,39 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/pageMetadata";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { GalleryPageHero } from "@/components/sections/gallery/GalleryPageHero";
-import { GalleryHolidayTypeSection } from "@/components/sections/gallery/GalleryHolidayTypeSection";
-import { holidayTypeDetails } from "@/lib/holidayTypeDetails";
+import { PageMain } from "@/components/layout/PageMain";
+import { PageHero } from "@/components/sections/PageHero";
+import { GalleryPageContent } from "@/components/sections/gallery/GalleryPageContent";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { galleryFaqs } from "@/lib/faqs";
+import { basePath } from "@/lib/siteConfig";
 
-export const metadata: Metadata = {
-  title: "Gallery | Memories You Can Make With Us | Blissful Escapes",
+export const metadata: Metadata = pageMetadata({
+  title: "Gallery",
   description:
-    "Explore our visual gallery of memories. From luxury overwater villas and beach bays to safari game drives and scenic rail journeys, discover what your next holiday could look like.",
-};
+    "Photographs from the trips we plan, from Capri and the Maldives to Machu Picchu and the Great Barrier Reef, with pictures sent back by clients.",
+  path: "/gallery/",
+});
 
 export default function GalleryPage() {
-  const total = holidayTypeDetails.length;
-
   return (
     <>
       <Header />
-      <main className="flex-1">
-        <GalleryPageHero />
-        {holidayTypeDetails.map((ht, index) => (
-          <GalleryHolidayTypeSection
-            key={ht.slug}
-            holidayType={ht}
-            index={index}
-            totalCount={total}
-            tone={index % 2 === 0 ? "dark" : "light"}
-            reverse={index % 2 === 1}
-          />
-        ))}
-      </main>
+      <PageMain>
+        <PageHero
+          eyebrow="Gallery"
+          title="Recent travels"
+          intro="From Capri and the Maldives to Machu Picchu and the Great Barrier Reef, photographed on the trips we plan and sent back by the clients who took them."
+          imageSrc={`${basePath}/assets/images/destinations/indian-ocean/ocean-sunset-dhows.webp`}
+          imageAlt="The sun setting over the Indian Ocean with dhows out on the water"
+          footnote="35 photographs from recent trips"
+        />
+        <GalleryPageContent />
+        <FaqSection faqs={galleryFaqs} idPrefix="gallery" eyebrow="Gallery" title="Common questions" />
+        <ContactSection idPrefix="gallery-contact" />
+      </PageMain>
       <Footer />
     </>
   );

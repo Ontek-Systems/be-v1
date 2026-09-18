@@ -18,13 +18,13 @@ export function HolidayTypesSection() {
       <div className="absolute inset-0 bg-primary-sky/80" />
 
       <Container className="relative">
-        <div className="mb-12 text-center sm:mb-16 lg:text-left">
-          <SectionEyebrow underlineColor="gold" dark>What kind of trip?</SectionEyebrow>
+        <div className="hero-text-shadow mb-12 text-center sm:mb-16 lg:text-left">
+          <SectionEyebrow underlineColor="gold" dark>Types of trips</SectionEyebrow>
           <Heading as="h2" size="lg" className="text-white">
-            Types of Holiday
+            What we specialise in
           </Heading>
           <Text size="lg" className="mx-auto mt-[13px] max-w-2xl text-primary-cream lg:mx-0">
-            Whether you are planning the honeymoon of a lifetime or a family trip the kids will actually remember, I will put together something that fits you properly.
+            Honeymoons, safaris, family holidays, proposals, destination weddings, wellbeing escapes and solo travel. Pick whichever is closest to the trip you have in mind.
           </Text>
         </div>
 
